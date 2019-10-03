@@ -1,11 +1,17 @@
-﻿namespace C_Sharp_Challenge_Skeleton.Answers
+﻿using System.Runtime.InteropServices;
+using System.Security;
+
+namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question4
     {
+        [DllImport("native.so", EntryPoint = "ans4")]
+        [SuppressUnmanagedCodeSecurity]
+        public static extern int NativeAnswer(int[] v, int[] c, int len, int cap);
+
         public static int Answer(int[] v, int[] c, int mc)
         {
-            //TODO: Please work out the solution;
-            return -1;
+            return NativeAnswer(v, c, c.Length, mc);
         }
     }
 }

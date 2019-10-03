@@ -29,4 +29,10 @@
     <Compile Remove="Components\TimedAnswerInt.cs" />
     <Compile Remove="Controllers\QuestionController.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="native.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
