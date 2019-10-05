@@ -7,9 +7,9 @@
 //constants
 
 // Q3
-#define Q3_MAX_SCORE    100
+#define Q3_MAX_SCORE    1000000
 // Q4
-#define Q4_MAX_ITEMS    50
+#define Q4_MAX_ITEMS    100
 #define Q4_MAX_CAP      10000
 
 using namespace std;
@@ -17,7 +17,7 @@ extern "C" int ans1(int d, int ip, int rp) {
     return 0;
 }
 
-int x3[Q3_MAX_SCORE];
+int x3[Q3_MAX_SCORE + 10];
 extern "C" int ans3(int* s, int sl, int* y, int yl) {
     sort(s, s + sl);
     int nl = unique(s, s+sl) - s, bs = 0, bc = -1;
@@ -36,7 +36,7 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
     return bc;
 }
 
-int dp4[Q4_MAX_ITEMS][Q4_MAX_CAP];
+int dp4[Q4_MAX_ITEMS + 10][Q4_MAX_CAP + 10];
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     for (int i=1;i<=len;i++) {
         for (int j=0;j<=cap;j++) {
