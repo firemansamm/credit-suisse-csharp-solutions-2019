@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<TestSequence>
+  <Test Name="C_Sharp_Challenge_Tests.SkeletonTests.TestQ1" Source="/root/GlobalCC-csharp-firemansamm/C_Sharp_Challenge_Tests/bin/Debug/netcoreapp2.1/C_Sharp_Challenge_Tests.dll" />
+  <Test Name="C_Sharp_Challenge_Tests.SkeletonTests.TestQ2" Source="/root/GlobalCC-csharp-firemansamm/C_Sharp_Challenge_Tests/bin/Debug/netcoreapp2.1/C_Sharp_Challenge_Tests.dll" />
+  <Test Name="C_Sharp_Challenge_Tests.SkeletonTests.TestQ3" Source="/root/GlobalCC-csharp-firemansamm/C_Sharp_Challenge_Tests/bin/Debug/netcoreapp2.1/C_Sharp_Challenge_Tests.dll" />
+</TestSequence>
