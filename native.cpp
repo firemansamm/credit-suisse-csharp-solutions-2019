@@ -29,6 +29,8 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
         if (x3[rk] > bs) {
             bs = x3[rk];
             bc = rk;
+        } else if (x3[rk] == bs) {
+            bc = max(bc, rk);
         }
     }
     return bc;
