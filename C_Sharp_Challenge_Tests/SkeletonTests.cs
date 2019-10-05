@@ -19,17 +19,15 @@ namespace C_Sharp_Challenge_Tests
         private readonly string baseUrl = "https://cscc-gl.herokuapp.com/";
 
         [TestMethod]
-        public async void TestQ1()
+        public async Task TestQ1()
         {
-            var travisUUID = Environment.GetEnvironmentVariable("travis_uuid");
+            var travisUUID = Environment.GetEnvironmentVariable("travistestidentifier");
             if (travisUUID == null) {
                 travisUUID = "";
             }
             string responseBody = await client.GetStringAsync(baseUrl + "tests/run/1/" + travisUUID);
-            TestCaseList testCaseList = JsonConvert.DeserializeObject<TestCaseList>(responseBody);
-            List<TestCase> testCases = testCaseList.testCases;
+            List<TestCase> testCases = JsonConvert.DeserializeObject<List<TestCase>>(responseBody);
             List<Answer> answers = new List<Answer>();
-
             foreach (var test in testCases)
             {
                 try
@@ -85,16 +83,15 @@ namespace C_Sharp_Challenge_Tests
         }
 
         [TestMethod]
-        public async void TestQ2()
+        public async Task TestQ2()
         {
-            var travisUUID = Environment.GetEnvironmentVariable("travis_uuid");
+            var travisUUID = Environment.GetEnvironmentVariable("travistestidentifier");
             if (travisUUID == null)
             {
                 travisUUID = "";
             }
             string responseBody = await client.GetStringAsync(baseUrl + "tests/run/2/" + travisUUID);
-            TestCaseList testCaseList = (TestCaseList)JsonConvert.DeserializeObject(responseBody);
-            List<TestCase> testCases = testCaseList.testCases;
+            List<TestCase> testCases = JsonConvert.DeserializeObject<List<TestCase>>(responseBody);
             List<Answer> answers = new List<Answer>();
 
             foreach (var test in testCases)
@@ -102,7 +99,7 @@ namespace C_Sharp_Challenge_Tests
                 try
                 {
                     Answer answer = new Answer();
-                    Q2Object input = (Q2Object)JsonConvert.DeserializeObject(test.input);
+                    Q2Object input = JsonConvert.DeserializeObject<Q2Object>(test.input);
                     var cancellationToken = new CancellationTokenSource();
                     cancellationToken.CancelAfter(1000);
                     await Task.Run(() => answer = getSecondAnswer(input, test), cancellationToken.Token);
@@ -154,16 +151,15 @@ namespace C_Sharp_Challenge_Tests
         }
 
         [TestMethod]
-        public async void TestQ3()
+        public async Task TestQ3()
         {
-            var travisUUID = Environment.GetEnvironmentVariable("travis_uuid");
+            var travisUUID = Environment.GetEnvironmentVariable("travistestidentifier");
             if (travisUUID == null)
             {
                 travisUUID = "";
             }
             string responseBody = await client.GetStringAsync(baseUrl + "tests/run/3/" + travisUUID);
-            TestCaseList testCaseList = (TestCaseList)JsonConvert.DeserializeObject(responseBody);
-            List<TestCase> testCases = testCaseList.testCases;
+            List<TestCase> testCases = JsonConvert.DeserializeObject<List<TestCase>>(responseBody);
             List<Answer> answers = new List<Answer>();
 
             foreach (var test in testCases)
@@ -171,7 +167,7 @@ namespace C_Sharp_Challenge_Tests
                 try
                 {
                     Answer answer = new Answer();
-                    Q3Object input = (Q3Object)JsonConvert.DeserializeObject(test.input);
+                    Q3Object input = JsonConvert.DeserializeObject<Q3Object>(test.input);
                     var cancellationToken = new CancellationTokenSource();
                     cancellationToken.CancelAfter(1000);
                     await Task.Run(() => answer = getThirdAnswer(input, test), cancellationToken.Token);
@@ -223,16 +219,15 @@ namespace C_Sharp_Challenge_Tests
         }
 
         [TestMethod]
-        public async void TestQ4()
+        public async Task TestQ4()
         {
-            var travisUUID = Environment.GetEnvironmentVariable("travis_uuid");
+            var travisUUID = Environment.GetEnvironmentVariable("travistestidentifier");
             if (travisUUID == null)
             {
                 travisUUID = "";
             }
             string responseBody = await client.GetStringAsync(baseUrl + "tests/run/4/" + travisUUID);
-            TestCaseList testCaseList = (TestCaseList)JsonConvert.DeserializeObject(responseBody);
-            List<TestCase> testCases = testCaseList.testCases;
+            List<TestCase> testCases = JsonConvert.DeserializeObject<List<TestCase>>(responseBody);
             List<Answer> answers = new List<Answer>();
 
             foreach (var test in testCases)
@@ -240,7 +235,7 @@ namespace C_Sharp_Challenge_Tests
                 try
                 {
                     Answer answer = new Answer();
-                    Q4Object input = (Q4Object)JsonConvert.DeserializeObject(test.input);
+                    Q4Object input = JsonConvert.DeserializeObject<Q4Object>(test.input);
                     var cancellationToken = new CancellationTokenSource();
                     cancellationToken.CancelAfter(1000);
                     await Task.Run(() => answer = getFourthAnswer(input, test), cancellationToken.Token);
@@ -292,16 +287,15 @@ namespace C_Sharp_Challenge_Tests
         }
 
         [TestMethod]
-        public async void TestQ5()
+        public async Task TestQ5()
         {
-            var travisUUID = Environment.GetEnvironmentVariable("travis_uuid");
+            var travisUUID = Environment.GetEnvironmentVariable("travistestidentifier");
             if (travisUUID == null)
             {
                 travisUUID = "";
             }
             string responseBody = await client.GetStringAsync(baseUrl + "tests/run/5/" + travisUUID);
-            TestCaseList testCaseList = (TestCaseList)JsonConvert.DeserializeObject(responseBody);
-            List<TestCase> testCases = testCaseList.testCases;
+            List<TestCase> testCases = JsonConvert.DeserializeObject<List<TestCase>>(responseBody);
             List<Answer> answers = new List<Answer>();
 
             foreach (var test in testCases)
@@ -362,16 +356,15 @@ namespace C_Sharp_Challenge_Tests
         }
 
         [TestMethod]
-        public async void TestQ6()
+        public async Task TestQ6()
         {
-            var travisUUID = Environment.GetEnvironmentVariable("travis_uuid");
+            var travisUUID = Environment.GetEnvironmentVariable("travistestidentifier");
             if (travisUUID == null)
             {
                 travisUUID = "";
             }
             string responseBody = await client.GetStringAsync(baseUrl + "tests/run/6/" + travisUUID);
-            TestCaseList testCaseList = (TestCaseList)JsonConvert.DeserializeObject(responseBody);
-            List<TestCase> testCases = testCaseList.testCases;
+            List<TestCase> testCases = JsonConvert.DeserializeObject<List<TestCase>>(responseBody);
             List<Answer> answers = new List<Answer>();
 
             foreach (var test in testCases)
@@ -379,7 +372,7 @@ namespace C_Sharp_Challenge_Tests
                 try
                 {
                     Answer answer = new Answer();
-                    string[] input = (string[])JsonConvert.DeserializeObject(test.input);
+                    string[] input = JsonConvert.DeserializeObject<string[]>(test.input);
                     var cancellationToken = new CancellationTokenSource();
                     cancellationToken.CancelAfter(1000);
                     await Task.Run(() => answer = getSixthAnswer(input, test), cancellationToken.Token);

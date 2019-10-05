@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="C_Sharp_Challenge_Tests\**" />
+    <Content Remove="C_Sharp_Challenge_Tests\**" />
+    <EmbeddedResource Remove="C_Sharp_Challenge_Tests\**" />
+    <None Remove="C_Sharp_Challenge_Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
