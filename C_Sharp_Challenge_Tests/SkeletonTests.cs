@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using C_Sharp_Challenge_Skeleton.Answers;
@@ -58,7 +59,7 @@ namespace C_Sharp_Challenge_Tests
             if (travisUUID.Length > 0)
             {
                 string ans = JsonConvert.SerializeObject(answers);
-                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/1", new StringContent(ans));
+                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/1", new StringContent(ans, Encoding.UTF8, "application/json"));
             }
         }
 
@@ -125,7 +126,7 @@ namespace C_Sharp_Challenge_Tests
             if (travisUUID.Length > 0)
             {
                 string ans = JsonConvert.SerializeObject(answers);
-                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/2", new StringContent(ans));
+                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/2", new StringContent(ans, Encoding.UTF8, "application/json"));
             }
         }
 
@@ -193,7 +194,7 @@ namespace C_Sharp_Challenge_Tests
             if (travisUUID.Length > 0)
             {
                 string ans = JsonConvert.SerializeObject(answers);
-                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/3", new StringContent(ans));
+                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/3", new StringContent(ans, Encoding.UTF8, "application/json"));
             }
         }
 
@@ -261,7 +262,7 @@ namespace C_Sharp_Challenge_Tests
             if (travisUUID.Length > 0)
             {
                 string ans = JsonConvert.SerializeObject(answers);
-                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/4", new StringContent(ans));
+                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/4", new StringContent(ans, Encoding.UTF8, "application/json"));
             }
         }
 
@@ -329,7 +330,7 @@ namespace C_Sharp_Challenge_Tests
             if (travisUUID.Length > 0)
             {
                 string ans = JsonConvert.SerializeObject(answers);
-                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/5", new StringContent(ans));
+                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/5", new StringContent(ans, Encoding.UTF8, "application/json"));
             }
         }
 
@@ -398,7 +399,7 @@ namespace C_Sharp_Challenge_Tests
             if (travisUUID.Length > 0)
             {
                 string ans = JsonConvert.SerializeObject(answers);
-                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/6", new StringContent(ans));
+                await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/6", new StringContent(ans, Encoding.UTF8, "application/json"));
             }
         }
 
