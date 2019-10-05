@@ -9,8 +9,8 @@
 // Q3
 #define Q3_MAX_SCORE    1000000
 // Q4
-#define Q4_MAX_ITEMS    100
-#define Q4_MAX_CAP      10000
+#define Q4_MAX_ITEMS    1000
+#define Q4_MAX_CAP      100000
 
 using namespace std;
 extern "C" int ans1(int d, int ip, int rp) {

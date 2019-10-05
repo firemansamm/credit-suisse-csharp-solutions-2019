@@ -326,7 +326,6 @@ namespace C_Sharp_Challenge_Tests
                 }
             }
 
-
             if (travisUUID.Length > 0)
             {
                 string ans = JsonConvert.SerializeObject(answers);
