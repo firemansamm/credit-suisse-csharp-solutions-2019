@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security;
 
 namespace C_Sharp_Challenge_Skeleton.Answers
@@ -11,6 +12,10 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 
         public static int Answer(int[] v, int[] c, int mc)
         {
+            if (mc >= c.Sum())
+            {
+                return v.Sum();
+            }
             return NativeAnswer(v, c, c.Length, mc);
         }
     }
