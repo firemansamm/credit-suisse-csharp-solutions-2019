@@ -8,7 +8,8 @@ using namespace std;
 typedef pair<int, int> ii;
 
 //constants
-
+// Q2
+#define Q2_MAX_LENGTH   10000
 // Q3
 #define Q3_MAX_SCORE    1000000
 // Q4
@@ -17,14 +18,46 @@ typedef pair<int, int> ii;
 // Q5
 #define Q5_MAX_N        1000000
 
+//#define DEBUG
+#ifdef DEBUG
+    #define TEST printf("native compiled %s %s\n", __DATE__, __TIME__)
+#else 
+    #define TEST
+#endif
+
 extern "C" int ans1(int d, int ip, int rp) {
+    TEST;
     return 0;
+}
+
+ii sd2[Q2_MAX_LENGTH + 10];
+bool cmp2(ii a, ii b) {
+    if (a.first == b.first) return a.second > b.second;
+    else return a.first < b.first;
+}
+extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
+    TEST;
+    for (int i=0;i<len;i++){
+        sd2[i] = ii(r[i], b[i]);
+    }
+    sort(sd2, sd2 + len, cmp2);
+    for(int i=1;i<len;i++) {
+        sd2[i].second = max(sd2[i].second, sd2[i-1].second);
+    }
+    int ans = 0;
+    for(int i=0;i<tl;i++) {
+        int idx = upper_bound(sd2, sd2 + len, ii(t[i], 0), cmp2) - sd2 - 1;
+        ans += sd2[idx].second;
+    }
+    return ans;
 }
 
 int x3[Q3_MAX_SCORE + 10];
 extern "C" int ans3(int* s, int sl, int* y, int yl) {
+    TEST;
     sort(s, s + sl);
-    int nl = unique(s, s+sl) - s, bs = 0, bc = -1;
+    int nl = unique(s, s+sl) - s, bs = 0, bc = nl + 1;
+    memset(x3, 0, sizeof x3);
     for(int i=0;i<yl;i++) {
         int r = (lower_bound(s, s + nl, y[i]) - s);
         int rk = nl - r + (s[r] != y[i]);
@@ -41,6 +74,7 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
 
 int dp4[Q4_MAX_ITEMS + 10][Q4_MAX_CAP + 10];
 extern "C" int ans4(int* v, int *c, int len, int cap) {
+    TEST;
     for (int i=1;i<=len;i++) {
         int cc = c[i-1], cv = v[i-1];
         for(int j=0;j<=cap;j++) {
@@ -56,6 +90,7 @@ bool cmp(ii a, ii b) {
     return a.first < b.first;
 }
 extern "C" int ans5(int* d) {
+    TEST;
     int n = d[0];
     for(int i=0;i<n;i++) {
         int ix = (i + 1) * 2;
