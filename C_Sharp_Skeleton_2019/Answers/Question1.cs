@@ -10,12 +10,19 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question1
     {
-        [DllImport("native", EntryPoint = "ans1")]
-        [SuppressUnmanagedCodeSecurity]
-        public static extern int ans1(double d, double ip, double rp);
         public static int Answer(double initialLevelOfDebt, double interestPercentage, double repaymentPercentage)
         {
-            return ans1(initialLevelOfDebt, interestPercentage, repaymentPercentage);
+            double r = initialLevelOfDebt * repaymentPercentage / 100.0, p = initialLevelOfDebt / 10.0;
+            double sf = r * 100.0 / interestPercentage,
+                ll = initialLevelOfDebt - sf,
+                ii = (interestPercentage + 100.0) / 100.0;
+            double fl = 0.0;
+            for (; ll > r - sf; ll *= ii)
+            {
+                fl += r; 
+            }
+
+            return (int)Math.Round(fl + p + ll + sf);
         }
     }
 }
