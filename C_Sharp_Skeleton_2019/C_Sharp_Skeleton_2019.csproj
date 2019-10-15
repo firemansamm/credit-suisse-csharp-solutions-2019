@@ -6,6 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="native.dll" />
+    <None Remove="native.so" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="native.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="native.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Answers\" />
   </ItemGroup>
 
