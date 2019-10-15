@@ -44,9 +44,9 @@ bool cmp2(ii a, ii b) {
     if (a.first == b.first) return a.second > b.second;
     else return a.first < b.first;
 }*/
-int sd2[Q2_MAX_LENGTH + 10];
 extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     TEST;
+    int sd2[] = new int[Q2_MAX_LENGTH + 10];
     for (int i=0;i<len;i++){
 	    sd2[r[i]] = max(sd2[r[i]], b[i]);
     }
@@ -63,6 +63,7 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
         }
         ans += cm;
     }
+    delete[] sd2;
     return ans;
 }
 
