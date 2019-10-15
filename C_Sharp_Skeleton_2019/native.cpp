@@ -44,9 +44,10 @@ bool cmp2(ii a, ii b) {
     if (a.first == b.first) return a.second > b.second;
     else return a.first < b.first;
 }*/
+int sd2[Q2_MAX_LENGTH + 10];
 extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     TEST;
-    int sd2[] = new int[Q2_MAX_LENGTH + 10];
+    memset(sd2, 0, sizeof sd2);
     for (int i=0;i<len;i++){
 	    sd2[r[i]] = max(sd2[r[i]], b[i]);
     }
@@ -63,11 +64,10 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
         }
         ans += cm;
     }
-    delete[] sd2;
     return ans;
 }
 
-extern "C" int ans3(int* s, int sl, int* y, int yl) {
+/*extern "C" int ans3(int* s, int sl, int* y, int yl) {
     TEST;
     sort(s, s + sl);
     sort(y, y + yl);
@@ -108,6 +108,27 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
         bg = max(bg, g);
     }
     return bg;
+}*/
+
+int x3[Q3_MAX_SCORE + 10];
+extern "C" int ans3(int* s, int sl, int* y, int yl) {
+    TEST;
+    memset(x3, 0, sizeof x3);
+    sort(s, s + sl);
+    int nl = unique(s, s+sl) - s, bs = 0, bc = nl + 1;
+    memset(x3, 0, sizeof x3);
+    for(int i=0;i<yl;i++) {
+        int r = (lower_bound(s, s + nl, y[i]) - s);
+        int rk = nl - r + (s[r] != y[i]);
+        x3[rk]++;
+        if (x3[rk] > bs) {
+            bs = x3[rk];
+            bc = rk;
+        } else if (x3[rk] == bs) {
+            bc = max(bc, rk);
+        }
+    }
+    return bc;
 }
 
 int dp4[Q4_MAX_ITEMS + 10][Q4_MAX_CAP + 10];
