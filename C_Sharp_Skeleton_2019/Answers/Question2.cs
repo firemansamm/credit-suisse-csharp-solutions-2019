@@ -7,10 +7,10 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         [DllImport("native", EntryPoint = "ans2")]
         [SuppressUnmanagedCodeSecurity]
-        public static extern int NativeAnswer(int[] t, int tl, int[] r, int[] b, int len);
+        public static extern int ans2(int[] t, int tl, int[] r, int[] b, int len);
         public static int Answer(int[] risk, int[] bonus, int[] trader)
         {
-            return NativeAnswer(trader, trader.Length, risk, bonus, bonus.Length);
+            return ans2(trader, trader.Length, risk, bonus, bonus.Length);
         }
     }
 }

@@ -7,10 +7,11 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         [DllImport("native", EntryPoint = "ans5")]
         [SuppressUnmanagedCodeSecurity]
-        public static extern int NativeAnswer(int[] d);
+        public static extern int ans5(int[] d);
+
         public static int Answer(int[] input)
         {
-            return NativeAnswer(input);
+            return ans5(input);
         }
     }
 }

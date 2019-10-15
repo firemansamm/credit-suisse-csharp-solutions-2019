@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C_Sharp_Skeleton_2019", "C_Sharp_Skeleton_2019\C_Sharp_Skeleton_2019.csproj", "{78A083C2-D009-406C-9C56-4EB4A38D8B8A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C_Sharp_Skeleton_2019.Tests", "C_Sharp_Skeleton_2019.Tests\C_Sharp_Skeleton_2019.Tests.csproj", "{119F4813-67A6-442B-8A89-887556475DBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78A083C2-D009-406C-9C56-4EB4A38D8B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78A083C2-D009-406C-9C56-4EB4A38D8B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78A083C2-D009-406C-9C56-4EB4A38D8B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78A083C2-D009-406C-9C56-4EB4A38D8B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{119F4813-67A6-442B-8A89-887556475DBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{119F4813-67A6-442B-8A89-887556475DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{119F4813-67A6-442B-8A89-887556475DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{119F4813-67A6-442B-8A89-887556475DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3389853F-0C44-48BA-B1D3-E1B48B969CE1}
+	EndGlobalSection
+EndGlobal
