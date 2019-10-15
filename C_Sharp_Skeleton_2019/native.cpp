@@ -113,7 +113,6 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
 int x3[Q3_MAX_SCORE + 10];
 extern "C" int ans3(int* s, int sl, int* y, int yl) {
     TEST;
-    memset(x3, 0, sizeof x3);
     sort(s, s + sl);
     int nl = unique(s, s+sl) - s, bs = 0, bc = nl + 1;
     memset(x3, 0, sizeof x3);
