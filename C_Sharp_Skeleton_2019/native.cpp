@@ -46,7 +46,7 @@ bool cmp2(ii a, ii b) {
 }*/
 extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     TEST;
-    int sd2[] = new int[Q2_MAX_LENGTH + 10];
+    int *sd2 = new int[Q2_MAX_LENGTH + 10];
     for (int i=0;i<len;i++){
 	    sd2[r[i]] = max(sd2[r[i]], b[i]);
     }
