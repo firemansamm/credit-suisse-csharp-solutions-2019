@@ -14,10 +14,11 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         {
             double r = initialLevelOfDebt * repaymentPercentage * 0.01, p = initialLevelOfDebt * 0.1;
             double sf = r * 100.0 / interestPercentage,
+                bc = r - sf,
                 ll = initialLevelOfDebt - sf,
                 ii = (interestPercentage + 100.0) * 0.01;
             double fl = 0.0;
-            for (; ll > r - sf; ll *= ii)
+            for (; ll > bc; ll *= ii)
             {
                 fl += r; 
             }
