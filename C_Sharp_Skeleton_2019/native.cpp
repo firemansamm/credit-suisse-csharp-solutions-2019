@@ -107,20 +107,17 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
     return bp;
 }
 
-int dp4[Q4_MAX_CAP + 10];
+int dp4[Q4_MAX_ITEMS + 10][Q4_MAX_CAP + 10];
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     TEST;
-    memset(dp4, 0, sizeof dp4);
-    for (int i=0;i<len;i++) {
-        for(int j=cap;j>=c[i];j--) {
-            int nx = dp4[j-c[i]]+v[i];
-            if (nx > dp4[j]) dp4[j] = nx;
-            /*if (j < cc) dp4[i][j] = dp4[i-1][j];
-            else dp4[i][j] = max(dp4[i-1][j-cc] + cv, dp4[i-1][j]);*/
+    for (int i=1;i<=len;i++) {
+        int cc = c[i-1], cv = v[i-1];
+        for(int j=0;j<=cap;j++) {
+            if (j < cc) dp4[i][j] = dp4[i-1][j];
+            else dp4[i][j] = max(dp4[i-1][j-cc] + cv, dp4[i-1][j]);
         }
     }
-    //return dp4[len][cap];
-    return dp4[cap];
+    return dp4[len][cap];
 }
 
 ii d5[Q5_MAX_N + 10];
