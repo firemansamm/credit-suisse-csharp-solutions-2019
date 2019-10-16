@@ -27,8 +27,4 @@
     <PackageReference Include="AdvancedDLSupport" Version="3.1.0" />
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="&quot;$(ProjectDir)/compile.sh&quot;" />
-  </Target>
-
 </Project>
