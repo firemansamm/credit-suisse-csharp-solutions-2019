@@ -108,19 +108,16 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
 }
 
 int dp4[Q4_MAX_ITEMS + 10][Q4_MAX_CAP + 10];
-int dp(int *v, int *c, int idx, int cap) {
-    if (idx < 0 || cap <= 0) return 0;
-    if (dp4[idx][cap] != -1) return dp4[idx][cap];
-    int ret = dp(v, c, idx - 1, cap);
-    if (c[idx] <= cap) {
-        ret = max(res, dp(v, c, idx - 1, cap - c[idx]) + v[idx]);
-    }
-    return dp4[idx][cap] = ret;
-}
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     TEST;
-    memset(dp4, -1, sizeof dp4);
-    return dp(v, c, len - 1, cap);
+    for (int i=1;i<=len;i++) {
+        int cc = c[i-1], cv = v[i-1];
+        for(int j=0;j<=cap;j++) {
+            if (j < cc) dp4[i][j] = dp4[i-1][j];
+            else dp4[i][j] = max(dp4[i-1][j-cc] + cv, dp4[i-1][j]);
+        }
+    }
+    return dp4[len][cap];
 }
 
 ii d5[Q5_MAX_N + 10];
