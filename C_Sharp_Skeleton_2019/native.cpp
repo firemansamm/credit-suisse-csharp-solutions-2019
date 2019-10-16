@@ -53,12 +53,12 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     }
     sort(r, r + len);
     sort(t, t + tl);
-    int nl = unique(r, r + len) - r;
-    int dx = 0;
-    int ans = 0;
-    int cm = sd2[r[0]];
+    int nl = unique(r, r + len) - r,
+        dx = 0,
+        ans = 0,
+        cm = 0;
     for (int i=0;i<tl;i++){
-        while (r[dx] < t[i] && dx < nl - 1) {
+        while (r[dx] <= t[i] && dx < nl) {
             cm = max(sd2[r[dx]], cm);
             dx++;
         }
@@ -67,7 +67,7 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     return ans;
 }
 
-/*extern "C" int ans3(int* s, int sl, int* y, int yl) {
+extern "C" int ans3(int* s, int sl, int* y, int yl) {
     TEST;
     sort(s, s + sl);
     sort(y, y + yl);
@@ -77,14 +77,13 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
         g = nl + 1,
         c = 0,
         ix = 0,
-        lp = -1,
-        le = s[0];
+        lp = -1;
     for(int i=0;i<yl;i++) {
-        if (y[i] == lp || y[i] < le) {
+        if (y[i] == lp || y[i] < s[ix]) {
             c++;
             continue;
         }
-        while(le <= y[i]) {
+        while(s[ix] <= y[i] && ix < nl - 1) {
             if (c > 0) {
                 if (c > bc) {
                     bg = g;
@@ -96,8 +95,6 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
             ix++;
             g--;
             c = 0;
-            if (ix < nl) le = s[ix];
-            else le = 1<<30;
         }
         lp = y[i];
     }
@@ -108,26 +105,6 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
         bg = max(bg, g);
     }
     return bg;
-}*/
-
-int x3[Q3_MAX_SCORE + 10];
-extern "C" int ans3(int* s, int sl, int* y, int yl) {
-    TEST;
-    sort(s, s + sl);
-    int nl = unique(s, s+sl) - s, bs = 0, bc = nl + 1;
-    memset(x3, 0, sizeof x3);
-    for(int i=0;i<yl;i++) {
-        int r = (lower_bound(s, s + nl, y[i]) - s);
-        int rk = nl - r + (s[r] != y[i]);
-        x3[rk]++;
-        if (x3[rk] > bs) {
-            bs = x3[rk];
-            bc = rk;
-        } else if (x3[rk] == bs) {
-            bc = max(bc, rk);
-        }
-    }
-    return bc;
 }
 
 int dp4[Q4_MAX_ITEMS + 10][Q4_MAX_CAP + 10];

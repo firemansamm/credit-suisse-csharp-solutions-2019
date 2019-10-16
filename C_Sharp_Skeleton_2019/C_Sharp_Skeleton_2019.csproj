@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Answers\" />
+    <PackageReference Include="AdvancedDLSupport" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
