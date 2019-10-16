@@ -11,7 +11,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         public static extern int ans4(int[] v, int[] c, int len, int cap);
         public static int Answer(int[] v, int[] c, int mc)
         {
-            int[][] dp = new int[v.Length + 10][];
+            /*int[][] dp = new int[v.Length + 10][];
             dp[0] = new int[mc + 10];
             for (int i = 1; i <= v.Length; i++)
             {
@@ -24,8 +24,8 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 }
             }
 
-            return dp[v.Length][mc];
-            //return ans4(v, c, v.Length, mc);
+            return dp[v.Length][mc];*/
+            return ans4(v, c, v.Length, mc);
         }
     }
 }
