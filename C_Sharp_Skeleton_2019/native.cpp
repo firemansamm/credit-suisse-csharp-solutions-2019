@@ -113,7 +113,7 @@ int dp(int *v, int *c, int idx, int cap) {
     if (dp4[idx][cap] != -1) return dp4[idx][cap];
     int ret = dp(v, c, idx - 1, cap);
     if (c[idx] <= cap) {
-        ret = max(res, dp(v, c, idx - 1, cap - c[idx]) + v[idx]);
+        ret = max(ret, dp(v, c, idx - 1, cap - c[idx]) + v[idx]);
     }
     return dp4[idx][cap] = ret;
 }
