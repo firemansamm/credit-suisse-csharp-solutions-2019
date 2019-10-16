@@ -58,7 +58,7 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
         ans = 0,
         cm = 0;
     for (int i=0;i<tl;i++){
-        while (r[dx] <= t[i] && dx < nl) {
+        while (dx < nl && r[dx] <= t[i]) {
             cm = max(sd2[r[dx]], cm);
             dx++;
         }
