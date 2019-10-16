@@ -7,7 +7,8 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         public static int Answer(string[] input)
         {
             var (s, e) = (input[0][0], input[0][input[0].Length - 1]);
-            for (int i = input.Length - 1; i > 0; i--)
+            int ul = input.Length - 5 < 1 ? input.Length - 5 : 1;
+            for (int i = input.Length - 1; i >= ul; i--)
             {
                 if (input[i][0] == s && input[i][input[i].Length - 1] == e)
                 {
