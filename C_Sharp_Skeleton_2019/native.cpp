@@ -72,39 +72,39 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
     sort(s, s + sl);
     sort(y, y + yl);
     int nl = unique(s, s+sl) - s,
-        bg = -1,
+        bp = -1,
         bc = 0,
-        g = nl + 1,
+        p = nl + 1,
         c = 0,
-        ix = 0,
-        lp = -1;
+        ix = 0;
     for(int i=0;i<yl;i++) {
-        if (y[i] == lp || y[i] < s[ix]) {
-            c++;
-            continue;
-        }
-        while(s[ix] <= y[i] && ix < nl - 1) {
+        //printf("ix = %d\n", ix);
+        while (ix < nl && y[i] >= s[ix]) {
             if (c > 0) {
+                //printf("comparing %d (%d), %d (%d)\n", bc, bp, c, p);
                 if (c > bc) {
-                    bg = g;
                     bc = c;
+                    bp = p;
                 } else if (c == bc) {
-                    bg = max(bg, g);
+                    bp = max(bp, p);
                 }
             }
-            ix++;
-            g--;
             c = 0;
+            p--;
+            ix++;
         }
-        lp = y[i];
+        c++;
+        //printf("%d -> %d = %d\n", y[i], p, c);
     }
-    if (c > bc) {
-        bg = g;
-        bc = c;
-    } else if (c == bc) {
-        bg = max(bg, g);
+     if (c > 0) {
+        if (c > bc) {
+            bc = c;
+            bp = p;
+        } else if (c == bc) {
+            bp = max(bp, p);
+        }
     }
-    return bg;
+    return bp;
 }
 
 int dp4[Q4_MAX_ITEMS + 10][Q4_MAX_CAP + 10];
