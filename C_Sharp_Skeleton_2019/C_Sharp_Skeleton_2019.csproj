@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="&quot;$(ProjectDir)\compile.sh&quot;" />
+    <Exec Command="&quot;$(ProjectDir)/compile.sh&quot;" />
   </Target>
 
 </Project>
