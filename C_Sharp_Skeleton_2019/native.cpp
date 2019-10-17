@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstring>
 #include <bitset>
+#include <queue>
 
 using namespace std;
 typedef pair<int, int> ii;
@@ -121,9 +122,14 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
 }
 
 ii d5[Q5_MAX_N + 10];
-bool cmp(ii a, ii b) {
-    return a.first < b.first;
-}
+struct state5{
+    vector<ii> fs;
+    int ldx;
+    state5(ii init, int _ldx) : ldx(_ldx) {
+        fs.push_back(init);
+    }
+    state5(int _ldx) : ldx(_ldx) {}
+};
 extern "C" int ans5(int* d) {
     TEST;
     int n = d[0];
@@ -132,20 +138,56 @@ extern "C" int ans5(int* d) {
         d5[i].second = d[ix];
         d5[i].first = d[ix - 1];
     }
-    sort(d5, d5 + n, cmp);
-    vector<ii> f;
-    f.push_back(d5[n-1]);
-    for(int i=n-2;i>=0;i--){
-        int bm = 1<<30, bj = -1;
-        for (int j=0;j<f.size();j++){
-            int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
-            if (td >= vd && vd < bm) {
-                bj = j;
+    sort(d5, d5 + n);
+    int nl = unique(d5, d5 + n) - d5; // only unique ones matter
+    if (n < 15) {
+        queue<state5> f;
+        f.emplace(d5[nl-1], nl-1);
+        int ans = 1<<30, cp = 0;
+        // n^2 bfs, n ~ 80-100
+        while (!f.empty()) {
+            state5 s = f.front();
+            f.pop();
+            //printf("got state @ %d, size = %d\n", s.ldx, s.fs.size());
+            if (s.ldx == 0) {
+                ans = min(ans, (int)s.fs.size());
+                continue;
             }
+            int nx = s.ldx - 1;
+            for (int i=0;i<s.fs.size();i++){
+                int td = s.fs[i].first - d5[nx].first, fd = abs(s.fs[i].second - d5[nx].second);
+                if (td >= fd) {
+                    state5 ns(nx);
+                    // replace-push
+                    ns.fs = s.fs;
+                    ns.fs[i] = d5[nx];
+                    f.push(ns);
+                    cp++;
+                }
+            }
+            // non-replace-push
+            state5 ns(nx);
+            ns.fs = s.fs;
+            ns.fs.push_back(d5[nx]);
+            f.push(ns);
+            cp++;
         }
-        //printf("%d, %d -> %d, %d\n", f[bj].first, f[bj].second, d5[i].first, d5[i].second);
-        if (bj == -1) f.push_back(d5[i]);
-        else f[bj] = d5[i];
+        return ans;
+    } else {
+        vector<ii> f;
+        f.push_back(d5[nl-1]);
+        for(int i=nl-2;i>=0;i--){
+            int bm = 1<<30, bj = -1;
+            for (int j=0;j<f.size();j++){
+                int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
+                if (td >= vd && vd < bm) {
+                    bj = j;
+                }
+            }
+            //printf("%d, %d -> %d, %d\n", f[bj].first, f[bj].second, d5[i].first, d5[i].second);
+            if (bj == -1) f.push_back(d5[i]);
+            else f[bj] = d5[i];
+        }
+        return f.size();
     }
-    return f.size();
 }
