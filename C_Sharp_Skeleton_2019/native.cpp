@@ -5,6 +5,7 @@
 #include <cstring>
 #include <bitset>
 #include <queue>
+#include <future>
 
 using namespace std;
 typedef pair<int, int> ii;
@@ -54,12 +55,11 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     }
     sort(r, r + len);
     sort(t, t + tl);
-    int nl = unique(r, r + len) - r,
-        dx = 0,
+    int dx = 0,
         ans = 0,
         cm = 0;
     for (int i=0;i<tl;i++){
-        while (dx < nl && r[dx] <= t[i]) {
+        while (dx < len && r[dx] <= t[i]) {
             cm = max(sd2[r[dx]], cm);
             dx++;
         }
