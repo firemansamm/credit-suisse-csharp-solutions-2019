@@ -140,7 +140,7 @@ extern "C" int ans5(int* d) {
     }
     sort(d5, d5 + n);
     int nl = unique(d5, d5 + n) - d5; // only unique ones matter
-    if (n < 15) {
+    if (nl < 15) {
         queue<state5> f;
         f.emplace(d5[nl-1], nl-1);
         int ans = 1<<30, cp = 0;
