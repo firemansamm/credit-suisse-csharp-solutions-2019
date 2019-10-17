@@ -139,7 +139,7 @@ extern "C" int ans5(int* d) {
         d5[i].first = d[ix - 1];
     }
     sort(d5, d5 + n);
-    int nl = unique(d5, d5 + n) - d5; // only unique ones matter
+    /*int nl = unique(d5, d5 + n) - d5; // only unique ones matter
     if (nl < 15) {
         queue<state5> f;
         f.emplace(d5[nl-1], nl-1);
@@ -173,10 +173,10 @@ extern "C" int ans5(int* d) {
             cp++;
         }
         return ans;
-    } else {
+    } else {*/
         vector<ii> f;
-        f.push_back(d5[nl-1]);
-        for(int i=nl-2;i>=0;i--){
+        f.push_back(d5[n-1]);
+        for(int i=n-2;i>=0;i--){
             int bm = 1<<30, bj = -1;
             for (int j=0;j<f.size();j++){
                 int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
@@ -189,5 +189,5 @@ extern "C" int ans5(int* d) {
             else f[bj] = d5[i];
         }
         return f.size();
-    }
+    //}
 }
