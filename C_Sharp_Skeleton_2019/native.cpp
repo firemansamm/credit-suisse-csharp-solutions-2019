@@ -180,9 +180,12 @@ ii d5[Q5_MAX_N];
     state5(int _ldx) : ldx(_ldx) {}
 };*/
 //bool v5[Q5_MAX_N + 10];
+int s5[Q5_MAX_N];
+int k5[Q5_MAX_N];
 extern "C" int ans5(int* d) {
     TEST;
     //memset(v5, 0, sizeof v5);
+    memset(k5, 0, sizeof k5);
     int n = d[0];
     for(int i=0,k=1;i<n;i++) {
         d5[i].first = d[k];
@@ -190,14 +193,23 @@ extern "C" int ans5(int* d) {
         k += 2;
     }
     sort(d5, d5 + n);
-    //int vx = n;
-    AugPath ap(n, n);
-    for(int i=0;i<n;i++){
-        for (int j=i+1;j<n;j++){
-            if (d5[j].first - d5[i].first >= abs(d5[j].second - d5[i].second)) {
-                ap.AddEdge(i, j);
+    int vs = n, ans = 0;
+    for (int i=0;i<n;i++){
+        int cv = 0;
+        for (int j=0;j<i;j++){
+            if (d5[i].first - d5[j].first >= abs(d5[i].second - d5[j].second)) {
+                cv = max(cv, s5[j]);
             }
         }
+        s5[i] = cv + 1;
+        k5[s5[i]]++;
+        ans = max(ans, k5[s5[i]]);
+        //printf("%d = %d\n", i, cv + 1);
     }
-    return n - ap.MCBM();
+    return ans;
+}
+
+int main() {
+    int d[] = {8, 3, 4, 8, 11, 3, 6, 7, 6, 8, 11, 8, 5, 6, 9, 5, 11};
+    printf("%d\n", ans5(d));
 }
