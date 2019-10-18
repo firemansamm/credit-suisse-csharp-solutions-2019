@@ -126,29 +126,23 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
 ii d5[Q5_MAX_N];
 bool v5[Q5_MAX_N];
 int p5[Q5_MAX_N];
-//bool adjm[Q5_MAX_N][Q5_MAX_N];
-//vector<int> g5[Q5_MAX_N];
 bool Aug(int x, int n) {
     if (v5[x]) return 0;
     v5[x] = 1;
-    //memset(adjm[x], 0, sizeof adjm[x]);
     for (int i=x+1;i<n;i++) {
-        /*adjm[x][i] = (d5[i].first - d5[x].first >= abs(d5[i].second - d5[x].second));
-        if (!adjm[x][i]) continue;*/
         if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
-        if (p5[i] == -1 || Aug(p5[i], n)) {
+        if (p5[i] == -1) {
             p5[i] = x;
             return 1;
         }
     }
-    /*for (int i=x+1;i<n;i++) {
-        if (!adjm[x][i]) continue;
-        //if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
-        if () {
+    for (int i=x+1;i<n;i++) {
+        if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
+        if (Aug(p5[i], n)) {
             p5[i] = x;
             return 1;
         }
-    }*/
+    }
     return 0;
 }
 extern "C" int ans5(int* d) {
