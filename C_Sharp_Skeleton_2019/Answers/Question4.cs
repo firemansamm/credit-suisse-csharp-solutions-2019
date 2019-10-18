@@ -8,10 +8,14 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         [DllImport("native", EntryPoint = "ans4")]
         [SuppressUnmanagedCodeSecurity]
-        public static extern int ans4(int[] v, int[] c, int len, int cap);
-        public static int Answer(int[] v, int[] c, int mc)
+        public static extern unsafe int ans4(int* v, int* c, int len, int cap);
+        public static unsafe int Answer(int[] v, int[] c, int mc)
         {
-            return ans4(v, c, v.Length, mc);
+            fixed (int* vp = &v[0])
+            fixed (int* cp = &c[0])
+            {
+                return ans4(vp, cp, v.Length, mc);
+            }
         }
     }
 }

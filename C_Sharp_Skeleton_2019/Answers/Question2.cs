@@ -8,14 +8,19 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         [DllImport("native", EntryPoint = "ans2")]
         [SuppressUnmanagedCodeSecurity]
-        public static extern int ans2(int[] t, int tl, int[] r, int[] b, int len);
+        public static extern unsafe int ans2(int* t, int tl, int* r, int* b, int len);
 
-        private static bool w = false;
-        public static int Answer(int[] risk, int[] bonus, int[] trader)
+        private static bool w;
+        public static unsafe int Answer(int[] risk, int[] bonus, int[] trader)
         {
             if (w)
             {
-                return ans2(trader, trader.Length, risk, bonus, bonus.Length);
+                fixed (int* tp = &trader[0])
+                fixed (int* rp = &risk[0])
+                fixed (int* bp = &bonus[0])
+                {
+                    return ans2(tp, trader.Length, rp, bp, bonus.Length);
+                }
             }
             w = true;
             int[] x = new int[160];
