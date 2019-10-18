@@ -12,11 +12,10 @@ typedef pair<int, int> ii;
 
 //constants
 // Q2
-#define Q2_MAX_LENGTH   150
+#define Q2_MAX_LENGTH   100
 // Q3
-#define Q3_MAX_SCORE    1000000
 // Q4
-#define Q4_MAX_ITEMS    500
+#define Q4_MAX_ITEMS    250
 #define Q4_MAX_CAP      10000
 // Q5
 #define Q5_MAX_N        100
@@ -41,26 +40,30 @@ extern "C" int ans1(double d, double ip, double rp) {
     return round((r * pm) + p + rem);
 }
 
-/*ii sd2[Q2_MAX_LENGTH + 10];
+ii sd2[Q2_MAX_LENGTH + 10];
 bool cmp2(ii a, ii b) {
     if (a.first == b.first) return a.second > b.second;
     else return a.first < b.first;
-}*/
-int sd2[Q2_MAX_LENGTH + 10];
+}
+//int sd2[Q2_MAX_LENGTH + 10];
 extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     TEST;
-    memset(sd2, 0, sizeof sd2);
+    /*memset(sd2, 0, sizeof sd2);
     for (int i=0;i<len;i++){
 	    sd2[r[i]] = max(sd2[r[i]], b[i]);
+    }*/
+    for (int i=0;i<len;i++){
+        sd2[i].first = r[i];
+        sd2[i].second = b[i];
     }
-    sort(r, r + len);
+    sort(sd2, sd2 + len, cmp2);
     sort(t, t + tl);
     int dx = 0,
         ans = 0,
         cm = 0;
     for (int i=0;i<tl;i++){
-        while (dx < len && r[dx] <= t[i]) {
-            cm = max(sd2[r[dx]], cm);
+        while (dx < len && sd2[dx].first <= t[i]) {
+            cm = max(sd2[dx].second, cm);
             dx++;
         }
         ans += cm;
@@ -130,8 +133,10 @@ struct state5{
     }
     state5(int _ldx) : ldx(_ldx) {}
 };
+//bool v5[Q5_MAX_N + 10];
 extern "C" int ans5(int* d) {
     TEST;
+    //memset(v5, 0, sizeof v5);
     int n = d[0];
     for(int i=0;i<n;i++) {
         int ix = (i + 1) * 2;
@@ -139,55 +144,26 @@ extern "C" int ans5(int* d) {
         d5[i].first = d[ix - 1];
     }
     sort(d5, d5 + n);
-    /*int nl = unique(d5, d5 + n) - d5; // only unique ones matter
-    if (nl < 15) {
-        queue<state5> f;
-        f.emplace(d5[nl-1], nl-1);
-        int ans = 1<<30, cp = 0;
-        // n^2 bfs, n ~ 80-100
-        while (!f.empty()) {
-            state5 s = f.front();
-            f.pop();
-            //printf("got state @ %d, size = %d\n", s.ldx, s.fs.size());
-            if (s.ldx == 0) {
-                ans = min(ans, (int)s.fs.size());
-                continue;
+    //int vx = n;
+    vector<ii> f;
+    f.push_back(d5[n-1]);
+    for(int i=n-2;i>=0;i--){
+        int bm = 1<<30, bj = -1;
+        for (int j=0;j<f.size();j++){
+            int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
+            if (td >= vd && vd < bm) {
+                bj = j;
             }
-            int nx = s.ldx - 1;
-            for (int i=0;i<s.fs.size();i++){
-                int td = s.fs[i].first - d5[nx].first, fd = abs(s.fs[i].second - d5[nx].second);
-                if (td >= fd) {
-                    state5 ns(nx);
-                    // replace-push
-                    ns.fs = s.fs;
-                    ns.fs[i] = d5[nx];
-                    f.push(ns);
-                    cp++;
-                }
-            }
-            // non-replace-push
-            state5 ns(nx);
-            ns.fs = s.fs;
-            ns.fs.push_back(d5[nx]);
-            f.push(ns);
-            cp++;
         }
-        return ans;
-    } else {*/
-        vector<ii> f;
-        f.push_back(d5[n-1]);
-        for(int i=n-2;i>=0;i--){
-            int bm = 1<<30, bj = -1;
-            for (int j=0;j<f.size();j++){
-                int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
-                if (td >= vd && vd < bm) {
-                    bj = j;
-                }
-            }
-            //printf("%d, %d -> %d, %d\n", f[bj].first, f[bj].second, d5[i].first, d5[i].second);
-            if (bj == -1) f.push_back(d5[i]);
-            else f[bj] = d5[i];
-        }
-        return f.size();
-    //}
+        //if (bj != -1) printf("%d, %d -> %d, %d\n", f[bj].first, f[bj].second, d5[i].first, d5[i].second);
+        //else printf("** %d, %d\n", d5[i].first, d5[i].second);
+        if (bj == -1) f.push_back(d5[i]);
+        else f[bj] = d5[i];
+    }
+    return f.size();
+}
+
+int main() {
+    int d[] = {8, 3, 4, 8, 11, 3, 6, 7, 6, 8, 11, 8, 5, 6, 9, 5, 11};
+    printf("%d\n", ans5(d));
 }
