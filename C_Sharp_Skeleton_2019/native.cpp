@@ -123,6 +123,53 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     return dp4[len][cap];
 }
 
+struct AugPath {
+    int A, B;   //size of left, right groups
+    vector<vector<int> > G; //size A
+    vector<bool> visited;   //size A
+    vector<int> P;          //size B
+    
+    AugPath(int _A, int _B): A(_A), B(_B), G(_A), P(_B, -1) {}
+    
+    void AddEdge(int a, int b) {    //a from left, b from right
+        G[a].push_back(b);
+    }
+    bool Aug(int x) {
+        if (visited[x]) return 0;
+        visited[x] = 1;
+        /* Greedy heuristic */
+        for (auto it:G[x]) {
+            if (P[it] == -1) {
+                P[it] = x;
+                return 1;
+            }
+        }
+        for (auto it:G[x]) {
+            if (Aug(P[it])) {
+                P[it] = x;
+                return 1;
+            }
+        }
+        return 0;
+    }
+    int MCBM() {
+        int matchings = 0;
+        for (int i = 0; i < A; ++i) {
+            visited.resize(A, 0);
+            matchings += Aug(i);
+            visited.clear();
+        }
+        return matchings;
+    }
+    vector<pair<int, int> > GetMatchings() {
+        vector<pair<int, int> > matchings;
+        for (int i = 0; i < B; ++i) {
+            if (P[i] != -1) matchings.emplace_back(P[i], i);
+        }
+        return matchings;
+    }
+};
+
 ii d5[Q5_MAX_N];
 /*struct state5{
     vector<ii> fs;
@@ -144,25 +191,13 @@ extern "C" int ans5(int* d) {
     }
     sort(d5, d5 + n);
     //int vx = n;
-    vector<ii> f;
-    f.push_back(d5[n-1]);
-    for(int i=n-2;i>=0;i--){
-        int bm = 1<<30, bj = -1;
-        for (int j=0;j<f.size();j++){
-            int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
-            if (td >= vd && vd < bm) {
-                bj = j;
+    AugPath ap(n, n);
+    for(int i=0;i<n;i++){
+        for (int j=i+1;j<n;j++){
+            if (d5[j].first - d5[i].first >= abs(d5[j].second - d5[i].second)) {
+                ap.AddEdge(i, j);
             }
         }
-        //if (bj != -1) printf("%d, %d -> %d, %d\n", f[bj].first, f[bj].second, d5[i].first, d5[i].second);
-        //else printf("** %d, %d\n", d5[i].first, d5[i].second);
-        if (bj == -1) f.push_back(d5[i]);
-        else f[bj] = d5[i];
     }
-    return f.size();
-}
-
-int main() {
-    int d[] = {8, 3, 4, 8, 11, 3, 6, 7, 6, 8, 11, 8, 5, 6, 9, 5, 11};
-    printf("%d\n", ans5(d));
+    return n - ap.MCBM();
 }
