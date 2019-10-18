@@ -4,8 +4,6 @@
 #include <vector>
 #include <cstring>
 #include <bitset>
-#include <queue>
-#include <future>
 
 using namespace std;
 typedef pair<int, int> ii;
