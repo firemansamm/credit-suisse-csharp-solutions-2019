@@ -12,7 +12,7 @@ typedef pair<int, int> ii;
 
 //constants
 // Q2
-#define Q2_MAX_LENGTH   100
+#define Q2_MAX_LENGTH   150
 // Q3
 // Q4
 #define Q4_MAX_ITEMS    250
@@ -40,30 +40,31 @@ extern "C" int ans1(double d, double ip, double rp) {
     return round((r * pm) + p + rem);
 }
 
-ii sd2[Q2_MAX_LENGTH + 10];
+/*ii sd2[Q2_MAX_LENGTH + 10];
 bool cmp2(ii a, ii b) {
     if (a.first == b.first) return a.second > b.second;
     else return a.first < b.first;
-}
-//int sd2[Q2_MAX_LENGTH + 10];
+}*/
+int sd2[Q2_MAX_LENGTH];
 extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     TEST;
-    /*memset(sd2, 0, sizeof sd2);
+    memset(sd2, 0, sizeof sd2);
     for (int i=0;i<len;i++){
 	    sd2[r[i]] = max(sd2[r[i]], b[i]);
-    }*/
-    for (int i=0;i<len;i++){
+    }
+    /*for (int i=0;i<len;i++){
         sd2[i].first = r[i];
         sd2[i].second = b[i];
     }
-    sort(sd2, sd2 + len, cmp2);
+    sort(sd2, sd2 + len, cmp2);*/
+    sort(r, r + len);
     sort(t, t + tl);
     int dx = 0,
         ans = 0,
         cm = 0;
     for (int i=0;i<tl;i++){
-        while (dx < len && sd2[dx].first <= t[i]) {
-            cm = max(sd2[dx].second, cm);
+        while (dx < len && r[dx] <= t[i]) {
+            cm = max(sd2[r[dx]], cm);
             dx++;
         }
         ans += cm;
@@ -111,7 +112,7 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
     return bp;
 }
 
-int dp4[Q4_MAX_ITEMS + 10][Q4_MAX_CAP + 10];
+int dp4[Q4_MAX_ITEMS][Q4_MAX_CAP];
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     TEST;
     for (int i=1;i<=len;i++) {
@@ -124,28 +125,28 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     return dp4[len][cap];
 }
 
-ii d5[Q5_MAX_N + 10];
-struct state5{
+ii d5[Q5_MAX_N];
+/*struct state5{
     vector<ii> fs;
     int ldx;
     state5(ii init, int _ldx) : ldx(_ldx) {
         fs.push_back(init);
     }
     state5(int _ldx) : ldx(_ldx) {}
-};
+};*/
 //bool v5[Q5_MAX_N + 10];
 extern "C" int ans5(int* d) {
     TEST;
     //memset(v5, 0, sizeof v5);
     int n = d[0];
     for(int i=0;i<n;i++) {
-        int ix = (i + 1) * 2;
-        d5[i].second = d[ix];
-        d5[i].first = d[ix - 1];
+        d5[i].first = d[(i * 2) + 1];
+        d5[i].second = d[(i + 1) * 2];
     }
     sort(d5, d5 + n);
     //int vx = n;
     vector<ii> f;
+    f.reserve(15);
     f.push_back(d5[n-1]);
     for(int i=n-2;i>=0;i--){
         int bm = 1<<30, bj = -1;
