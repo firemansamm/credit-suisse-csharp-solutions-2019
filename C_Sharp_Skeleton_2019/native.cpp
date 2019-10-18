@@ -126,20 +126,24 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
 ii d5[Q5_MAX_N];
 bool v5[Q5_MAX_N];
 int p5[Q5_MAX_N];
+bool adjm[Q5_MAX_N][Q5_MAX_N];
 //vector<int> g5[Q5_MAX_N];
 bool Aug(int x, int n) {
     if (v5[x]) return 0;
     v5[x] = 1;
-    /* Greedy heuristic */
+    memset(adjm[x], 0, sizeof adjm[x]);
     for (int i=x+1;i<n;i++) {
-        if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
+        adjm[x][i] = (d5[i].first - d5[x].first >= abs(d5[i].second - d5[x].second));
+        if (!adjm[x][i]) continue;
+        //if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
         if (p5[i] == -1) {
             p5[i] = x;
             return 1;
         }
     }
     for (int i=x+1;i<n;i++) {
-        if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
+        if (!adjm[x][i]) continue;
+        //if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
         if (Aug(p5[i], n)) {
             p5[i] = x;
             return 1;
@@ -157,16 +161,6 @@ extern "C" int ans5(int* d) {
         k += 2;
     }
     sort(d5, d5 + n);
-    //int vx = n;
-    /*for(int i=0;i<n;i++){
-        g5[i].clear();
-        for (int j=i+1;j<n;j++){
-            if (d5[j].first - d5[i].first >= abs(d5[j].second - d5[i].second)) {
-                g5[i].push_back(j);
-            }
-        }
-    }*/
-
     int matchings = 0;
     for (int i = 0; i < n; ++i) {
         memset(v5, 0, sizeof v5);
