@@ -139,14 +139,14 @@ extern "C" int ans5(int* d) {
     TEST;
     //memset(v5, 0, sizeof v5);
     int n = d[0];
-    for(int i=0;i<n;i++) {
-        d5[i].first = d[(i * 2) + 1];
-        d5[i].second = d[(i + 1) * 2];
+    for(int i=0,k=1;i<n;i++) {
+        d5[i].first = d[k];
+        d5[i].second = d[k + 1];
+        k += 2;
     }
     sort(d5, d5 + n);
     //int vx = n;
     vector<ii> f;
-    f.reserve(15);
     f.push_back(d5[n-1]);
     for(int i=n-2;i>=0;i--){
         int bm = 1<<30, bj = -1;
