@@ -16,7 +16,7 @@ typedef pair<int, int> ii;
 #define Q4_MAX_ITEMS    250
 #define Q4_MAX_CAP      10000
 // Q5
-#define Q5_MAX_N        100
+#define Q5_MAX_N        125
 
 //#define DEBUG
 #ifdef DEBUG
@@ -123,69 +123,33 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     return dp4[len][cap];
 }
 
-struct AugPath {
-    int A, B;   //size of left, right groups
-    vector<vector<int> > G; //size A
-    vector<bool> visited;   //size A
-    vector<int> P;          //size B
-    
-    AugPath(int _A, int _B): A(_A), B(_B), G(_A), P(_B, -1) {}
-    
-    void AddEdge(int a, int b) {    //a from left, b from right
-        G[a].push_back(b);
-    }
-    bool Aug(int x) {
-        if (visited[x]) return 0;
-        visited[x] = 1;
-        /* Greedy heuristic */
-        for (auto it:G[x]) {
-            if (P[it] == -1) {
-                P[it] = x;
-                return 1;
-            }
-        }
-        for (auto it:G[x]) {
-            if (Aug(P[it])) {
-                P[it] = x;
-                return 1;
-            }
-        }
-        return 0;
-    }
-    int MCBM() {
-        int matchings = 0;
-        for (int i = 0; i < A; ++i) {
-            visited.resize(A, 0);
-            matchings += Aug(i);
-            visited.clear();
-        }
-        return matchings;
-    }
-    vector<pair<int, int> > GetMatchings() {
-        vector<pair<int, int> > matchings;
-        for (int i = 0; i < B; ++i) {
-            if (P[i] != -1) matchings.emplace_back(P[i], i);
-        }
-        return matchings;
-    }
-};
-
 ii d5[Q5_MAX_N];
-/*struct state5{
-    vector<ii> fs;
-    int ldx;
-    state5(ii init, int _ldx) : ldx(_ldx) {
-        fs.push_back(init);
+bool v5[Q5_MAX_N];
+int p5[Q5_MAX_N];
+//vector<int> g5[Q5_MAX_N];
+bool Aug(int x, int n) {
+    if (v5[x]) return 0;
+    v5[x] = 1;
+    /* Greedy heuristic */
+    for (int i=x+1;i<n;i++) {
+        if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
+        if (p5[i] == -1) {
+            p5[i] = x;
+            return 1;
+        }
     }
-    state5(int _ldx) : ldx(_ldx) {}
-};*/
-//bool v5[Q5_MAX_N + 10];
-int s5[Q5_MAX_N];
-int k5[Q5_MAX_N];
+    for (int i=x+1;i<n;i++) {
+        if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
+        if (Aug(p5[i], n)) {
+            p5[i] = x;
+            return 1;
+        }
+    }
+    return 0;
+}
 extern "C" int ans5(int* d) {
     TEST;
-    //memset(v5, 0, sizeof v5);
-    memset(k5, 0, sizeof k5);
+    memset(p5, -1, sizeof p5);
     int n = d[0];
     for(int i=0,k=1;i<n;i++) {
         d5[i].first = d[k];
@@ -193,23 +157,20 @@ extern "C" int ans5(int* d) {
         k += 2;
     }
     sort(d5, d5 + n);
-    int vs = n, ans = 0;
-    for (int i=0;i<n;i++){
-        int cv = 0;
-        for (int j=0;j<i;j++){
-            if (d5[i].first - d5[j].first >= abs(d5[i].second - d5[j].second)) {
-                cv = max(cv, s5[j]);
+    //int vx = n;
+    /*for(int i=0;i<n;i++){
+        g5[i].clear();
+        for (int j=i+1;j<n;j++){
+            if (d5[j].first - d5[i].first >= abs(d5[j].second - d5[i].second)) {
+                g5[i].push_back(j);
             }
         }
-        s5[i] = cv + 1;
-        k5[s5[i]]++;
-        ans = max(ans, k5[s5[i]]);
-        //printf("%d = %d\n", i, cv + 1);
-    }
-    return ans;
-}
+    }*/
 
-int main() {
-    int d[] = {8, 3, 4, 8, 11, 3, 6, 7, 6, 8, 11, 8, 5, 6, 9, 5, 11};
-    printf("%d\n", ans5(d));
+    int matchings = 0;
+    for (int i = 0; i < n; ++i) {
+        memset(v5, 0, sizeof v5);
+        matchings += Aug(i, n);
+    }
+    return n - matchings;
 }
