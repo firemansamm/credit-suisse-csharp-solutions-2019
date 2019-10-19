@@ -10,13 +10,13 @@ typedef pair<int, int> ii;
 
 //constants
 // Q2
-#define Q2_MAX_LENGTH   150
+#define Q2_MAX_LENGTH   100
 // Q3
 // Q4
 #define Q4_MAX_ITEMS    250
 #define Q4_MAX_CAP      10000
 // Q5
-#define Q5_MAX_N        150
+#define Q5_MAX_N        1050
 
 //#define DEBUG
 #ifdef DEBUG
@@ -137,7 +137,6 @@ extern "C" int ans5(int* d) {
     TEST;
     memset(p5, -1, sizeof p5);
     int n = d[0];
-    //d5 = (ii*)(d + 1);
     for(int i=0,k=1;i<n;i++) {
         d5[i].first = d[k];
         d5[i].second = d[k + 1];
