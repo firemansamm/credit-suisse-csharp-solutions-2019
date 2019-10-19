@@ -16,7 +16,7 @@ typedef pair<int, int> ii;
 #define Q4_MAX_ITEMS    250
 #define Q4_MAX_CAP      10000
 // Q5
-#define Q5_MAX_N        125
+#define Q5_MAX_N        150
 
 //#define DEBUG
 #ifdef DEBUG
@@ -50,11 +50,6 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     for (int i=0;i<len;i++){
 	    if (b[i] > sd2[r[i]]) sd2[r[i]] = b[i];
     }
-    /*for (int i=0;i<len;i++){
-        sd2[i].first = r[i];
-        sd2[i].second = b[i];
-    }
-    sort(sd2, sd2 + len, cmp2);*/
     sort(r, r + len);
     sort(t, t + tl);
     int dx = 0,
@@ -123,9 +118,9 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     return dp4[len][cap];
 }
 
-ii *d5;
+ii d5[Q5_MAX_N];
 bool v5[Q5_MAX_N];
-char p5[Q5_MAX_N];
+short p5[Q5_MAX_N];
 bool Aug(int x, int n) {
     if (v5[x]) return 0;
     v5[x] = 1;
@@ -142,7 +137,12 @@ extern "C" int ans5(int* d) {
     TEST;
     memset(p5, -1, sizeof p5);
     int n = d[0];
-    d5 = (ii*)(d + 1);
+    //d5 = (ii*)(d + 1);
+    for(int i=0,k=1;i<n;i++) {
+        d5[i].first = d[k];
+        d5[i].second = d[k + 1];
+        k += 2;
+    }
     sort(d5, d5 + n);
     int matchings = 0;
     for (int i = n - 1; i >= 0; i--) {
@@ -150,5 +150,4 @@ extern "C" int ans5(int* d) {
         matchings += Aug(i, n);
     }
     return n - matchings;
-    return 0;
 }
