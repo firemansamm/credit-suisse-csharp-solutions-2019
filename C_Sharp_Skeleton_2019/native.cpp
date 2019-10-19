@@ -126,7 +126,14 @@ bool Aug(int x, int n) {
     v5[x] = 1;
     for (int i=x+1;i<n;i++) {
         if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
-        if (p5[i] == -1 || Aug(p5[i], n)) {
+        if (p5[i] == -1) {
+            p5[i] = x;
+            return 1;
+        }
+    }
+    for (int i=x+1;i<n;i++){
+        if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
+        if (Aug(p5[i], n)) {
             p5[i] = x;
             return 1;
         }
