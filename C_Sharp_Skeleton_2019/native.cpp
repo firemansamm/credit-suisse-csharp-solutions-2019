@@ -139,8 +139,8 @@ extern "C" int ans5(int* d) {
     int n = d[0];
     for(int i=0,k=1;i<n;i++) {
         d5[i].first = d[k];
-        d5[i].second = d[k + 1];
-        k += 2;
+        d5[i].second = d[++k];
+        k++;
     }
     sort(d5, d5 + n);
     int matchings = 0;
