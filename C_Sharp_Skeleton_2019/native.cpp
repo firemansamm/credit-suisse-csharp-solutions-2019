@@ -144,10 +144,10 @@ extern "C" int ans5(int* d) {
     TEST;
     memset(p5, -1, sizeof p5);
     int n = d[0];
-    for(int i=0,k=1;i<n;i++) {
-        d5[i].first = d[k];
-        d5[i].second = d[++k];
-        k++;
+#pragma GCC ivdep
+    for(int i=0;i<n;i++) {
+        d5[i].first = d[(i * 2) + 1];
+        d5[i].second = d[(i + 1) * 2];
     }
     sort(d5, d5 + n);
     int matchings = 0;
