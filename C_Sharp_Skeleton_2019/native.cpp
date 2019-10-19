@@ -43,12 +43,12 @@ bool cmp2(ii a, ii b) {
     if (a.first == b.first) return a.second > b.second;
     else return a.first < b.first;
 }*/
-int sd2[Q2_MAX_LENGTH];
+unsigned char sd2[Q2_MAX_LENGTH];
 extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     TEST;
     memset(sd2, 0, sizeof sd2);
     for (int i=0;i<len;i++){
-	    sd2[r[i]] = max(sd2[r[i]], b[i]);
+	    if (b[i] > sd2[r[i]]) sd2[r[i]] = b[i];
     }
     /*for (int i=0;i<len;i++){
         sd2[i].first = r[i];
@@ -58,8 +58,8 @@ extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
     sort(r, r + len);
     sort(t, t + tl);
     int dx = 0,
-        ans = 0,
-        cm = 0;
+        ans = 0;
+    unsigned char cm = 0;
     for (int i=0;i<tl;i++){
         while (dx < len && r[dx] <= t[i]) {
             cm = max(sd2[r[dx]], cm);
@@ -123,9 +123,9 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     return dp4[len][cap];
 }
 
-ii d5[Q5_MAX_N];
+ii *d5;
 bool v5[Q5_MAX_N];
-int p5[Q5_MAX_N];
+char p5[Q5_MAX_N];
 bool Aug(int x, int n) {
     if (v5[x]) return 0;
     v5[x] = 1;
@@ -136,29 +136,19 @@ bool Aug(int x, int n) {
             return 1;
         }
     }
-    /*for (int i=x+1;i<n;i++) {
-        if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
-        if () {
-            p5[i] = x;
-            return 1;
-        }
-    }*/
     return 0;
 }
 extern "C" int ans5(int* d) {
     TEST;
     memset(p5, -1, sizeof p5);
     int n = d[0];
-    for(int i=0,k=1;i<n;i++) {
-        d5[i].first = d[k];
-        d5[i].second = d[k + 1];
-        k += 2;
-    }
+    d5 = (ii*)(d + 1);
     sort(d5, d5 + n);
     int matchings = 0;
-    for (int i = 0; i < n; ++i) {
+    for (int i = n - 1; i >= 0; i--) {
         memset(v5, 0, sizeof v5);
         matchings += Aug(i, n);
     }
     return n - matchings;
+    return 0;
 }
