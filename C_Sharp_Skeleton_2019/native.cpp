@@ -44,18 +44,18 @@ bool cmp2(ii a, ii b) {
     else return a.first < b.first;
 }*/
 unsigned char sd2[Q2_MAX_LENGTH];
-extern "C" int ans2(int* t, int tl, int* r, int* b, int len) {
+extern "C" int ans2(int* t, int* r, int* b, int len) {
     TEST;
     memset(sd2, 0, sizeof sd2);
     for (int i=0;i<len;i++){
 	    if (b[i] > sd2[r[i]]) sd2[r[i]] = b[i];
     }
     sort(r, r + len);
-    sort(t, t + tl);
+    sort(t, t + len);
     int dx = 0,
         ans = 0;
     unsigned char cm = 0;
-    for (int i=0;i<tl;i++){
+    for (int i=0;i<len;i++){
         while (dx < len && r[dx] <= t[i]) {
             cm = max(sd2[r[dx]], cm);
             dx++;
@@ -118,22 +118,31 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     return dp4[len][cap];
 }
 
-ii d5[Q5_MAX_N];
+struct ii5 {
+    int first, second;
+    bool operator<(const ii5& other) {
+        // lexographical like std::pair
+        return (first == other.first && second < other.second) || first < other.first;
+    }
+};
+
+ii5 *d5;
+int n5;
 bool v5[Q5_MAX_N];
 short p5[Q5_MAX_N];
-bool Aug(int x, int n) {
+bool Aug(int x) {
     if (v5[x]) return 0;
     v5[x] = 1;
-    for (int i=x+1;i<n;i++) {
+    for (int i=x+1;i<n5;i++) {
         if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
         if (p5[i] == -1) {
             p5[i] = x;
             return 1;
         }
     }
-    for (int i=x+1;i<n;i++){
+    for (int i=x+1;i<n5;i++){
         if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
-        if (Aug(p5[i], n)) {
+        if (Aug(p5[i])) {
             p5[i] = x;
             return 1;
         }
@@ -143,17 +152,18 @@ bool Aug(int x, int n) {
 extern "C" int ans5(int* d) {
     TEST;
     memset(p5, -1, sizeof p5);
-    int n = d[0];
-#pragma GCC ivdep
-    for(int i=0;i<n;i++) {
+    n5 = d[0];
+/*#pragma GCC ivdep
+    for(int i=0;i<n5;i++) {
         d5[i].first = d[(i * 2) + 1];
         d5[i].second = d[(i + 1) * 2];
-    }
-    sort(d5, d5 + n);
+    }*/
+    d5 = (ii5*)(d + 1);
+    sort(d5, d5 + n5);
     int matchings = 0;
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = n5 - 1; i >= 0; i--) {
         memset(v5, 0, sizeof v5);
-        matchings += Aug(i, n);
+        matchings += Aug(i);
     }
-    return n - matchings;
+    return n5 - matchings;
 }
