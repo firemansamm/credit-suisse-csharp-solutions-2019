@@ -118,15 +118,15 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     return dp4[len][cap];
 }
 
-struct ii5 {
+/*struct ii5 {
     int first, second;
     bool operator<(const ii5& other) {
         // lexographical like std::pair
         return (first == other.first && second < other.second) || first < other.first;
     }
-};
+};*/
 
-ii5 *d5;
+ii d5[Q5_MAX_N];
 int n5;
 bool v5[Q5_MAX_N];
 short p5[Q5_MAX_N];
@@ -153,12 +153,12 @@ extern "C" int ans5(int* d) {
     TEST;
     memset(p5, -1, sizeof p5);
     n5 = d[0];
-/*#pragma GCC ivdep
+#pragma GCC ivdep
     for(int i=0;i<n5;i++) {
         d5[i].first = d[(i * 2) + 1];
         d5[i].second = d[(i + 1) * 2];
-    }*/
-    d5 = (ii5*)(d + 1);
+    }
+    //d5 = (ii5*)(d + 1);
     sort(d5, d5 + n5);
     int matchings = 0;
     for (int i = n5 - 1; i >= 0; i--) {
