@@ -154,7 +154,6 @@ extern "C" int ans5(int* d) {
     memset(p5, -1, sizeof p5);
     n5 = d[0];
 #pragma ivdep
-#pragma omp simd
     for(int i=0;i<n5;i++) {
         d5[i].first = d[(i * 2) + 1];
         d5[i].second = d[(i + 1) * 2];
