@@ -129,20 +129,14 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
 ii d5[Q5_MAX_N];
 int n5;
 bool v5[Q5_MAX_N];
+bool v5s[Q5_MAX_N];
 short p5[Q5_MAX_N];
 bool Aug(int x) {
     if (v5[x]) return 0;
     v5[x] = 1;
-    for (int i=x+1;i<n5;i++) {
-        if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
-        if (p5[i] == -1) {
-            p5[i] = x;
-            return 1;
-        }
-    }
     for (int i=x+1;i<n5;i++){
         if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
-        if (Aug(p5[i])) {
+        if (p5[i] == -1 || Aug(p5[i])) {
             p5[i] = x;
             return 1;
         }
@@ -152,6 +146,7 @@ bool Aug(int x) {
 extern "C" int ans5(int* d) {
     TEST;
     memset(p5, -1, sizeof p5);
+    memset(v5s, 0, sizeof v5s);
     n5 = d[0];
 #pragma ivdep
     for(int i=0;i<n5;i++) {
@@ -161,7 +156,20 @@ extern "C" int ans5(int* d) {
     //d5 = (ii5*)(d + 1);
     sort(d5, d5 + n5);
     int matchings = 0;
+    for (int x=0;x<n5;x++){
+        for (int i=x+1;i<n5;i++){
+            if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
+            if (p5[i] == -1) {
+                //printf("gm %d->%d\n", x, i);
+                p5[i] = x;
+                matchings++;
+                v5s[x] = 1;
+                break;
+            }
+        }
+    }
     for (int i = n5 - 1; i >= 0; i--) {
+        if (v5s[i]) continue;
         memset(v5, 0, sizeof v5);
         matchings += Aug(i);
     }
