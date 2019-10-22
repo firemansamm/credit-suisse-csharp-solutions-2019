@@ -128,15 +128,15 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
 
 ii d5[Q5_MAX_N];
 int n5;
-bool v5[Q5_MAX_N];
-bool v5s[Q5_MAX_N];
-short p5[Q5_MAX_N];
+int v5[Q5_MAX_N];
+int v5s[Q5_MAX_N];
+int p5[Q5_MAX_N];
 bool Aug(int x) {
-    if (v5[x]) return 0;
-    v5[x] = 1;
     for (int i=x+1;i<n5;i++){
+        if (v5[i]) continue;
         if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
-        if (p5[i] == -1 || Aug(p5[i])) {
+        v5[i] = 1;
+        if (p5[i] < 0 || Aug(p5[i])) {
             p5[i] = x;
             return 1;
         }
@@ -159,8 +159,7 @@ extern "C" int ans5(int* d) {
     for (int x=0;x<n5;x++){
         for (int i=x+1;i<n5;i++){
             if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
-            if (p5[i] == -1) {
-                //printf("gm %d->%d\n", x, i);
+            if (p5[i] < 0) {
                 p5[i] = x;
                 matchings++;
                 v5s[x] = 1;
@@ -170,8 +169,8 @@ extern "C" int ans5(int* d) {
     }
     for (int i = n5 - 1; i >= 0; i--) {
         if (v5s[i]) continue;
-        memset(v5, 0, sizeof v5);
         matchings += Aug(i);
+        memset(v5, 0, sizeof v5);
     }
     return n5 - matchings;
 }
