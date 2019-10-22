@@ -57,7 +57,7 @@ extern "C" int ans2(int* t, int* r, int* b, int len) {
     unsigned char cm = 0;
     for (int i=0;i<len;++i){
         while (dx < len && r[dx] <= t[i]) {
-            if (sd2[r[dx]]) > cm) cm = sd2[r[dx]];
+            if (sd2[r[dx]] > cm) cm = sd2[r[dx]];
             ++dx;
         }
         ans += cm;
