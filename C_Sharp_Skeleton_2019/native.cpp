@@ -105,19 +105,19 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
     return bp;
 }
 
-int dp4[Q4_MAX_CAP];
+int dp4[Q4_MAX_ITEMS][Q4_MAX_CAP];
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     TEST;
-    memset(dp4, 0, sizeof dp4);
-    int cs = 0;
-    for (int i=0;i<len;++i) {
-        int cc = c[i], cv = v[i];
-        cs += cc;
-        for(int j=min(cs, cap);j>=cc;--j) {
-            if (dp4[j-cc] + cv > dp4[j]) dp4[j] = dp4[j-cc] + cv;
+    int cs = 0, ans = 0;
+    for (int i=1;i<=len;++i) {
+        int cc = c[i-1], cv = v[i-1];
+        //cs += cc;
+        for (int j=0;j<=cap;j++) {
+            if (j < cc) dp4[i][j] = dp4[i-1][j];
+            else dp4[i][j] = max(dp4[i-1][j-cc] + cv, dp4[i-1][j]);
         }
     }
-    return *max_element(dp4, dp4 + cap + 1);
+    return dp4[len][cap];
 }
 
 /*struct ii5 {
