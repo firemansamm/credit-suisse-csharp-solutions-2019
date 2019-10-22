@@ -7,7 +7,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question2
     {
-        [DllImport("native2", EntryPoint = "ans2")]
+        [DllImport("native/native2", EntryPoint = "ans2")]
         [SuppressUnmanagedCodeSecurity]
         public static extern unsafe int ans2(int* t, int* r, int* b, int len);
 
