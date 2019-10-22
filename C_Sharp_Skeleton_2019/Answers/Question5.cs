@@ -8,7 +8,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
 
         [DllImport("native/native5", EntryPoint = "ans5"), SuppressUnmanagedCodeSecurity, MethodImpl(MethodImplOptions.Unmanaged)]
-        public static extern int Answer(int d);
+        public static extern int Answer(int[] d);
 
         /*public static unsafe int Answer(int[] input)
         {
