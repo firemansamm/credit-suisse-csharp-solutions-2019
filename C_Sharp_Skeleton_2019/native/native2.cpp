@@ -30,7 +30,7 @@ extern "C" int ans2(int* t, int* r, int* b, int len) {
     TEST;
     memset(sd2, 0, sizeof sd2);
     for (int i=0;i<len;i++){
-        sd2[r[i]] = b[i];
+        if (b[i] > sd2[r[i]]) sd2[r[i]] = b[i];
     }
     for (int i=1;i<Q2_MAX_LENGTH;i++){
         if (sd2[i-1] > sd2[i]) sd2[i] = sd2[i-1];
