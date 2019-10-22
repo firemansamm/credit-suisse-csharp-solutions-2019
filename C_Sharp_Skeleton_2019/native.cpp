@@ -43,7 +43,7 @@ bool cmp2(ii a, ii b) {
     if (a.first == b.first) return a.second > b.second;
     else return a.first < b.first;
 }*/
-unsigned char sd2[Q2_MAX_LENGTH];
+int sd2[Q2_MAX_LENGTH];
 extern "C" int ans2(int* t, int* r, int* b, int len) {
     TEST;
     memset(sd2, 0, sizeof sd2);
@@ -53,8 +53,8 @@ extern "C" int ans2(int* t, int* r, int* b, int len) {
     sort(r, r + len);
     sort(t, t + len);
     int dx = 0,
-        ans = 0;
-    unsigned char cm = 0;
+        ans = 0,
+        cm = 0;
     for (int i=0;i<len;++i){
         while (dx < len && r[dx] <= t[i]) {
             if (sd2[r[dx]] > cm) cm = sd2[r[dx]];
