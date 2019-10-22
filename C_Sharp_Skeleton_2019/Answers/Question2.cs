@@ -13,12 +13,24 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         private static bool w;
         public static unsafe int Answer(int[] risk, int[] bonus, int[] trader)
         {
-            fixed (int* tp = &trader[0])
-            fixed (int* rp = &risk[0])
-            fixed (int* bp = &bonus[0])
+            int[] x = new int[150];
+            int len = risk.Length;
+            for (int i = len - 1; i >= 0; i--)
             {
-                return ans2(tp, rp, bp, bonus.Length);
+                if (bonus[i] > x[risk[i]]) x[risk[i]] = bonus[i];
             }
+
+            for (int i = 1; i < 150; i++)
+            {
+                if (x[i - 1] > x[i]) x[i] = x[i - 1];
+            }
+            int dx = 0, ans = 0, cm = 0;
+            for (int i = 0; i < len; i++)
+            {
+                ans += x[trader[i]];
+            }
+
+            return ans;
         }
     }
 }
