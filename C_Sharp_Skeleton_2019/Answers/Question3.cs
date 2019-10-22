@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 
@@ -6,8 +7,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question3
     {
-        [DllImport("native/native3", EntryPoint = "ans3")]
-        [SuppressUnmanagedCodeSecurity]
+        [DllImport("native/native3", EntryPoint = "ans3"), SuppressUnmanagedCodeSecurity, MethodImpl(MethodImplOptions.Unmanaged)]
         public static extern unsafe int ans3(int* s, int sl, int* y, int yl);
         public static unsafe int Answer(int[] scores, int[] alice)
         {
