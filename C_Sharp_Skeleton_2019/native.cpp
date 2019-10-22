@@ -105,17 +105,19 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
     return bp;
 }
 
-int dp4[Q4_MAX_ITEMS][Q4_MAX_CAP];
+int dp4[Q4_MAX_CAP];
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     TEST;
-    for (int i=1;i<=len;i++) {
-        int cc = c[i-1], cv = v[i-1];
-        for(int j=0;j<=cap;j++) {
-            if (j < cc) dp4[i][j] = dp4[i-1][j];
-            else dp4[i][j] = max(dp4[i-1][j-cc] + cv, dp4[i-1][j]);
+    memset(dp4, 0, sizeof dp4);
+    int cs = 0;
+    for (int i=0;i<len;++i) {
+        int cc = c[i], cv = v[i];
+        cs += cc;
+        for(int j=min(cs, cap);j>=cc;--j) {
+            if (dp4[j-cc] + cv > dp4[j]) dp4[j] = dp4[j-cc] + cv;
         }
     }
-    return dp4[len][cap];
+    return *max_element(dp4, dp4 + cap + 1);
 }
 
 /*struct ii5 {
@@ -132,7 +134,7 @@ int v5[Q5_MAX_N];
 int v5s[Q5_MAX_N];
 int p5[Q5_MAX_N];
 bool Aug(int x) {
-    for (int i=x+1;i<n5;i++){
+    for (int i=x+1;i<n5;++i){
         if (v5[i]) continue;
         if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
         v5[i] = 1;
@@ -149,15 +151,15 @@ extern "C" int ans5(int* d) {
     memset(v5s, 0, sizeof v5s);
     n5 = d[0];
 #pragma GCC ivdep
-    for(int i=0;i<n5;i++) {
+    for(int i=0;i<n5;++i) {
         d5[i].first = d[(i * 2) + 1];
         d5[i].second = d[(i + 1) * 2];
     }
     //d5 = (ii5*)(d + 1);
     sort(d5, d5 + n5);
     int matchings = 0;
-    for (int x=0;x<n5;x++){
-        for (int i=x+1;i<n5;i++){
+    for (int x=0;x<n5;++x){
+        for (int i=x+1;i<n5;++i){
             if (d5[i].first - d5[x].first < abs(d5[i].second - d5[x].second)) continue;
             if (p5[i] < 0) {
                 p5[i] = x;
@@ -167,7 +169,7 @@ extern "C" int ans5(int* d) {
             }
         }
     }
-    for (int i = n5 - 1; i >= 0; i--) {
+    for (int i = n5 - 1; i >= 0; --i) {
         if (v5s[i]) continue;
         matchings += Aug(i);
         memset(v5, 0, sizeof v5);
