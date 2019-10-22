@@ -17,7 +17,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             fixed (int* bp = &bonus[0])
             fixed (int* tp = &trader[0])
             {
-                return ans2(rp, bp, tp, risk.Length);
+                return ans2(tp, rp, bp, risk.Length);
             }
             /*int[] x = new int[150];
             int len = risk.Length;
