@@ -47,7 +47,7 @@ unsigned char sd2[Q2_MAX_LENGTH];
 extern "C" int ans2(int* t, int* r, int* b, int len) {
     TEST;
     memset(sd2, 0, sizeof sd2);
-    for (int i=0;i<len;i++){
+    for (int i=0;i<len;++i){
 	    if (b[i] > sd2[r[i]]) sd2[r[i]] = b[i];
     }
     sort(r, r + len);
@@ -55,10 +55,10 @@ extern "C" int ans2(int* t, int* r, int* b, int len) {
     int dx = 0,
         ans = 0;
     unsigned char cm = 0;
-    for (int i=0;i<len;i++){
+    for (int i=0;i<len;++i){
         while (dx < len && r[dx] <= t[i]) {
-            cm = max(sd2[r[dx]], cm);
-            dx++;
+            if (sd2[r[dx]]) > cm) cm = sd2[r[dx]];
+            ++dx;
         }
         ans += cm;
     }
@@ -84,14 +84,14 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
                     bc = c;
                     bp = p;
                 } else if (c == bc) {
-                    bp = max(bp, p);
+                    if (p > bp) bp = p;
                 }
             }
             c = 0;
             p--;
-            ix++;
+            ++ix;
         }
-        c++;
+        ++c;
         //printf("%d -> %d = %d\n", y[i], p, c);
     }
      if (c > 0) {
@@ -99,7 +99,7 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
             bc = c;
             bp = p;
         } else if (c == bc) {
-            bp = max(bp, p);
+            if (p > bp) bp = p;
         }
     }
     return bp;
