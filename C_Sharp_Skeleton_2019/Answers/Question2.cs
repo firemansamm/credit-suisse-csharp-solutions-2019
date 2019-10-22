@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 using System.Security;
 
 namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question2
     {
-        [DllImport("native/native2", EntryPoint = "ans2")]
-        [SuppressUnmanagedCodeSecurity]
-        public static extern unsafe int ans2(int* t, int* r, int* b, int len);
-
-        private static bool w;
+        [MethodImpl(MethodImplOptions.NoOptimization)]
         public static unsafe int Answer(int[] risk, int[] bonus, int[] trader)
         {
             int[] x = new int[150];
