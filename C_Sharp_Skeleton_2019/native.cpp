@@ -105,9 +105,26 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
     return bp;
 }
 
+int dp4s[Q4_MAX_CAP];
+extern "C" int ans4s(int* v, int *c, int len, int cap) {
+    TEST;
+    memset(dp4s, 0, sizeof dp4s);
+    int cs = 0;
+    for (int i=0;i<len;++i) {
+        int cc = c[i], cv = v[i];
+        cs += cc;
+        for(int j=min(cs, cap);j>=cc;--j) {
+            if (dp4s[j-cc] + cv > dp4s[j]) dp4s[j] = dp4s[j-cc] + cv;
+        }
+    }
+    return *max_element(dp4s, dp4s + cap + 1);
+}
+
+
 int dp4[Q4_MAX_ITEMS][Q4_MAX_CAP];
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     TEST;
+    if (len > 200) return ans4s(v, c, len, cap);
     int cs = 0, ans = 0;
     for (int i=1;i<=len;++i) {
         int cc = c[i-1], cv = v[i-1];
@@ -119,6 +136,7 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     }
     return dp4[len][cap];
 }
+
 
 /*struct ii5 {
     int first, second;
