@@ -19,6 +19,14 @@
   <ItemGroup>
     <None Remove="native.dll" />
     <None Remove="native.so" />
+    <None Remove="native\native2.dll" />
+    <None Remove="native\native2.so" />
+    <None Remove="native\native3.dll" />
+    <None Remove="native\native3.so" />
+    <None Remove="native\native4.dll" />
+    <None Remove="native\native4.so" />
+    <None Remove="native\native5.dll" />
+    <None Remove="native\native5.so" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +34,30 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="native.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="native\native2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="native\native2.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="native\native3.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="native\native3.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="native\native4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="native\native4.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="native\native5.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="native\native5.so">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
