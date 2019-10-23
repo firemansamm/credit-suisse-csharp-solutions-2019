@@ -20,7 +20,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             {
                 return ans2(tp, rp, bp, risk.Length);
             }*/
-            int[] x = new int[125];
+            int* x = stackalloc int[125];
             int len = risk.Length, ans = 0;
             for (int i = len - 1; i >= 0; i--)
             {
