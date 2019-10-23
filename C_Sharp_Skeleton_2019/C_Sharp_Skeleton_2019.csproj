@@ -75,8 +75,4 @@
     <PackageReference Include="AdvancedDLSupport" Version="3.1.0" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="dotnet run --project &quot;$(ProjectDir)ctor-injector/ctor-injector&quot; -- &quot;$(TargetPath)&quot;" />
-  </Target>
-
 </Project>

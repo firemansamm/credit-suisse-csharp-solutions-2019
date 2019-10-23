@@ -16,6 +16,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ctor-injector\**" />
+    <EmbeddedResource Remove="ctor-injector\**" />
+    <None Remove="ctor-injector\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JetBrains.DotMemoryUnit" Version="3.0.20171219.105559" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
@@ -25,5 +31,9 @@
   <ItemGroup>
     <ProjectReference Include="..\C_Sharp_Skeleton_2019\C_Sharp_Skeleton_2019.csproj" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="dotnet run --project &quot;$(ProjectDir)ctor-injector/ctor-injector&quot; -- &quot;$(TargetPath)&quot;" />
+  </Target>
 
 </Project>
