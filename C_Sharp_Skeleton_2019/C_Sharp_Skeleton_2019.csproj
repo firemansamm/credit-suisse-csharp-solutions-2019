@@ -69,8 +69,4 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="dotnet run --project &quot;$(ProjectDir)ctor-injector/ctor-injector&quot; -- &quot;$(TargetPath)&quot;" />
-  </Target>
-
 </Project>
