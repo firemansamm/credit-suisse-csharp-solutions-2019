@@ -44,21 +44,7 @@ bool cmp(int a, int b) {
 }
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     TEST;
-    for (int i=0;i<len;i++){
-        if (c[i] > 0) rs4[i] = (v[i] * 100) / c[i];
-        else rs4[i] = 1<<30;
-        id[i] = i;
-    }
-    sort(id, id + len, cmp);
-    int cval = 0, cw = 0;
-    for (int i=0;i<len;i++){
-        if (cw + c[i] > cap) continue;
-        cw += c[i];
-        cval += v[i];
-    }
-    return cval;
-
-    /*if (len > 200) return ans4s(v, c, len, cap);
+    if (len > 200) return ans4s(v, c, len, cap);
     int cs = 0, ans = 0;
     for (int i=1;i<=len;++i) {
         int cc = c[i-1], cv = v[i-1];
@@ -68,5 +54,5 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
             else dp4[i][j] = max(dp4[i-1][j-cc] + cv, dp4[i-1][j]);
         }
     }
-    return dp4[len][cap];*/
+    return dp4[len][cap];
 }
