@@ -1,4 +1,4 @@
-#include "string.h"
+#include <cstring>
 //constants
 // Q2
 #define Q2_MAX_LENGTH   120

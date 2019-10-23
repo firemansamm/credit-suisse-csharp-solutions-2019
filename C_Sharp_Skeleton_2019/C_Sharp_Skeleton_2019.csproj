@@ -18,6 +18,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ctor-injector\**" />
+    <EmbeddedResource Remove="ctor-injector\**" />
+    <None Remove="ctor-injector\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="native.dll" />
     <None Remove="native.so" />
     <None Remove="native\native2.dll" />
@@ -63,8 +69,8 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AdvancedDLSupport" Version="3.1.0" />
-  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="dotnet run --project &quot;$(ProjectDir)ctor-injector/ctor-injector&quot; -- &quot;$(TargetPath)&quot;" />
+  </Target>
 
 </Project>

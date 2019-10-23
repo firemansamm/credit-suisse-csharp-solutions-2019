@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ctor-injector": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\Sam\\Desktop\\csc\\GlobalCC-csharp-firemansamm\\C_Sharp_Skeleton_2019\\bin\\Debug\\netcoreapp2.1\\C_Sharp_Skeleton_2019.dll\""
+    }
+  }
+}
