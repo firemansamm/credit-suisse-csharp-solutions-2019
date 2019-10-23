@@ -50,7 +50,7 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
         p = nl + 1,
         c = 0,
         ix = 0;
-    for(int i=0;i<yl;i++) {
+    for(int i=0;i<yl;++i) {
         //printf("ix = %d\n", ix);
         while (ix < nl && y[i] >= s[ix]) {
             if (c > 0) {
@@ -63,7 +63,7 @@ extern "C" int ans3(int* s, int sl, int* y, int yl) {
                 }
             }
             c = 0;
-            p--;
+            --p;
             ++ix;
         }
         ++c;
@@ -109,7 +109,7 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
         cc += c[i];
     }
     return ans;*/
-    if (len > 200) return ans4s(v, c, len, cap);
+    if (len > 100) return ans4s(v, c, len, cap);
     int cs = 0, ans = 0;
     for (int i=1;i<=len;++i) {
         int cc = c[i-1], cv = v[i-1];
@@ -130,7 +130,7 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     }
 };*/
 
-ii d5[Q5_MAX_N];
+/*ii d5[Q5_MAX_N];
 int n5;
 int v5[Q5_MAX_N];
 int v5s[Q5_MAX_N];
@@ -177,4 +177,36 @@ extern "C" int ans5(int* d) {
         memset(v5, 0, sizeof v5);
     }
     return n5 - matchings;
+}*/
+
+ii d5[Q5_MAX_N + 10];
+bitset<Q5_MAX_N + 10> v;
+bool cmp(ii a, ii b) {
+    return a.first < b.first;
+}
+extern "C" int ans5(int* d) {
+    TEST;
+    int n = d[0];
+    for(int i=0;i<n;i++) {
+        int ix = (i + 1) * 2;
+        d5[i].second = d[ix];
+        d5[i].first = d[ix - 1];
+    }
+    sort(d5, d5 + n, cmp);
+    vector<ii> f;
+    f.push_back(d5[n-1]);
+    for(int i=n-2;i>=0;--i){
+        int bj = -1;
+        for (int j=f.size() - 1;j>=0;--j){
+            int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
+            if (td >= vd) {
+                bj = j;
+                break;
+            }
+        }
+        //printf("%d, %d -> %d, %d\n", f[bj].first, f[bj].second, d5[i].first, d5[i].second);
+        if (bj == -1) f.push_back(d5[i]);
+        else f[bj] = d5[i];
+    }
+    return f.size();
 }
