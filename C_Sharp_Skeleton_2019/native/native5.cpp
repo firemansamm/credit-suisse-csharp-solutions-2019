@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cstring>
+#include <vector>
 
 using namespace std;
 typedef pair<int, int> ii;
@@ -40,8 +41,34 @@ bool Aug(int x) {
     }
     return 0;
 }
+bool cmp(ii a, ii b) {
+    return a.first < b.first;
+}
 extern "C" int ans5(int* d) {
     TEST;
+    /*int n = d[0];
+    for(int i=0, k = 1;i<n;i++) {
+        d5[i].second = d[k];
+        d5[i].first = d[k + 1];
+        k += 2;
+    }
+    sort(d5, d5 + n, cmp);
+    vector<ii> f;
+    f.push_back(d5[n-1]);
+    for(int i=n-2;i>=0;i--){
+        int bm = 1<<30, bj = -1;
+        for (int j=0;j<f.size();j++){
+            int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
+            if (td >= vd && vd < bm) {
+                bj = j;
+            }
+        }
+        //printf("%d, %d -> %d, %d\n", f[bj].first, f[bj].second, d5[i].first, d5[i].second);
+        if (bj == -1) f.push_back(d5[i]);
+        else f[bj] = d5[i];
+    }
+    return f.size();*/
+    return 0;
     memset(p5, -1, sizeof p5);
     memset(v5s, 0, sizeof v5s);
     n5 = d[0];
