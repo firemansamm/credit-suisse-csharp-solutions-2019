@@ -14,13 +14,13 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         
         public static unsafe int Answer(int[] risk, int[] bonus, int[] trader)
         {
-            /*fixed (int* rp = &risk[0])
+            fixed (int* rp = &risk[0])
             fixed (int* bp = &bonus[0])
             fixed (int* tp = &trader[0])
             {
                 return ans2(tp, rp, bp, risk.Length);
-            }*/
-            int* x = stackalloc int[125];
+            }
+            /*int* x = stackalloc int[125];
             int len = risk.Length, ans = 0;
             for (int i = len - 1; i >= 0; i--)
             {
@@ -36,7 +36,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 ans += x[trader[i]];
             }
 
-            return ans;
+            return ans;*/
         }
     }
 }
