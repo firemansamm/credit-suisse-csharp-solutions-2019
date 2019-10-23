@@ -180,19 +180,15 @@ extern "C" int ans5(int* d) {
 }*/
 
 ii d5[Q5_MAX_N + 10];
-bitset<Q5_MAX_N + 10> v;
-bool cmp(ii a, ii b) {
-    return a.first < b.first;
-}
 extern "C" int ans5(int* d) {
     TEST;
     int n = d[0];
-    for(int i=0;i<n;i++) {
-        int ix = (i + 1) * 2;
-        d5[i].second = d[ix];
-        d5[i].first = d[ix - 1];
+#pragma GCC ivdep
+    for(int i=0;i<n5;++i) {
+        d5[i].first = d[(i * 2) + 1];
+        d5[i].second = d[(i + 1) * 2];
     }
-    sort(d5, d5 + n, cmp);
+    sort(d5, d5 + n);
     vector<ii> f;
     f.push_back(d5[n-1]);
     for(int i=n-2;i>=0;--i){
