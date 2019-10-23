@@ -15,7 +15,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 }
             }
 
-            return -1;
+            return 0;
         }
     }
 }
