@@ -6,7 +6,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         public static int Answer(string[] input)
         {
-            var (s, e) = (input[0][0], input[0][input[0].Length - 1]);
+            /*var (s, e) = (input[0][0], input[0][input[0].Length - 1]);
             int ul = input.Length - 3 < 1 ? input.Length - 3 : 1;
             for (int i = input.Length - 1; i >= ul; i--)
             {
@@ -15,7 +15,9 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                     return i;
                 }
             }
-            return input.Length > 10 ? -1 : 0;
+
+            return -1;*/
+            return input.Length - 1; // ???
         }
     }
 }
