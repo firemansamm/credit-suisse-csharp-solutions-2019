@@ -45,7 +45,6 @@ bool cmp(int a, int b) {
 }
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     TEST;
-    return 0;
     //sort(c, c + len, cmp);
     //sort(v, v + len);
     int ans = 0, cc = 0;
