@@ -21,6 +21,8 @@ typedef pair<int, int> ii;
     #define TEST
 #endif
 
+#define fabs(x) ((x ^ (x >> 31)) - (x >> 31))
+
 ii d5[Q5_MAX_N];
 int n5;
 int v5[Q5_MAX_N];
