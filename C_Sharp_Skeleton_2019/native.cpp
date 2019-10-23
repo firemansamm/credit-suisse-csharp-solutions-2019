@@ -10,7 +10,7 @@ typedef pair<int, int> ii;
 
 //constants
 // Q2
-#define Q2_MAX_LENGTH   100
+#define Q2_MAX_LENGTH   120
 // Q3
 // Q4
 #define Q4_MAX_ITEMS    250
