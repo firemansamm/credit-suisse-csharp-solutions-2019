@@ -8,10 +8,12 @@ namespace C_Sharp_Skeleton_2019
         public static void Run()
         {
             // warms up the methods
+            Question1.Answer(0.0, 0.0, 0.0);
             Question2.Answer(new int[]{0}, new int[]{0}, new int[]{0});
             Question3.Answer(new int[]{0}, new int[]{0});
             Question4.Answer(new int[]{0}, new int[]{0}, 0);
             Question5.Answer(new int[] { 0 });
+            Question6.Answer(new string[] {"AA", "AA"});
         }
     }
 }
