@@ -25,10 +25,8 @@ typedef pair<int, int> ii;
     #define TEST
 #endif
 
-int sd2[Q2_MAX_LENGTH + 10];
-extern "C" int ans2(int* t, int* r, int* b, int len) {
+extern "C" int ans2(int* t, int* r, int* b, int* sd2, int len) {
     TEST;
-    memset(sd2, 0, sizeof sd2);
     for (int i=0;i<len;i++){
         if (b[i] > sd2[r[i]]) sd2[r[i]] = b[i];
     }
