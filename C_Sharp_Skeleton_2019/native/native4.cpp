@@ -46,11 +46,10 @@ bool cmp(int a, int b) {
 extern "C" int ans4(int* v, int *c, int len, int cap) {
     TEST;
     return 0;
-    tmp = v;
     //sort(c, c + len, cmp);
     //sort(v, v + len);
     int ans = 0, cc = 0;
-    for (int i=0;i<len;i++){
+    for (int i=len-1;i>=0;i--){
         if (cc + c[i] > cap) continue;
         if (v[i] == 0) continue;
         ans += v[i];

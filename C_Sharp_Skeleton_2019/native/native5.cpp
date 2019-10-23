@@ -47,20 +47,21 @@ bool cmp(ii a, ii b) {
 extern "C" int ans5(int* d) {
     TEST;
     /*int n = d[0];
-    for(int i=0, k = 1;i<n;i++) {
-        d5[i].second = d[k];
-        d5[i].first = d[k + 1];
-        k += 2;
+    for(int i=0;i<n;i++) {
+        int ix = (i + 1) * 2;
+        d5[i].second = d[ix];
+        d5[i].first = d[ix - 1];
     }
     sort(d5, d5 + n, cmp);
     vector<ii> f;
     f.push_back(d5[n-1]);
     for(int i=n-2;i>=0;i--){
         int bm = 1<<30, bj = -1;
-        for (int j=0;j<f.size();j++){
+        for (int j=f.size()-1;j>=0;j--){
             int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
-            if (td >= vd && vd < bm) {
+            if (td >= vd) {
                 bj = j;
+                break;
             }
         }
         //printf("%d, %d -> %d, %d\n", f[bj].first, f[bj].second, d5[i].first, d5[i].second);
@@ -68,7 +69,6 @@ extern "C" int ans5(int* d) {
         else f[bj] = d5[i];
     }
     return f.size();*/
-    return 0;
     memset(p5, -1, sizeof p5);
     memset(v5s, 0, sizeof v5s);
     n5 = d[0];
