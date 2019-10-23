@@ -130,7 +130,7 @@ extern "C" int ans4(int* v, int *c, int len, int cap) {
     }
 };*/
 
-/*ii d5[Q5_MAX_N];
+ii d5[Q5_MAX_N];
 int n5;
 int v5[Q5_MAX_N];
 int v5s[Q5_MAX_N];
@@ -177,32 +177,4 @@ extern "C" int ans5(int* d) {
         memset(v5, 0, sizeof v5);
     }
     return n5 - matchings;
-}*/
-
-ii d5[Q5_MAX_N + 10];
-extern "C" int ans5(int* d) {
-    TEST;
-    int n = d[0];
-#pragma GCC ivdep
-    for(int i=0;i<n5;++i) {
-        d5[i].first = d[(i * 2) + 1];
-        d5[i].second = d[(i + 1) * 2];
-    }
-    sort(d5, d5 + n);
-    vector<ii> f;
-    f.push_back(d5[n-1]);
-    for(int i=n-2;i>=0;--i){
-        int bj = -1;
-        for (int j=f.size() - 1;j>=0;--j){
-            int td = f[j].first - d5[i].first, vd = abs(d5[i].second - f[j].second);
-            if (td >= vd) {
-                bj = j;
-                break;
-            }
-        }
-        //printf("%d, %d -> %d, %d\n", f[bj].first, f[bj].second, d5[i].first, d5[i].second);
-        if (bj == -1) f.push_back(d5[i]);
-        else f[bj] = d5[i];
-    }
-    return f.size();
 }

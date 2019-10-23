@@ -58,12 +58,12 @@ namespace C_Sharp_Skeleton_2019.Tests
                 }
             }
 
-            if (travisUUID.Length > 0)
+            /*if (travisUUID.Length > 0)
             {
                 Console.WriteLine("Submitting Q1");
                 string ans = JsonConvert.SerializeObject(answers);
                 await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/1", new StringContent(ans, Encoding.UTF8, "application/json"));
-            }
+            }*/
         }
 
         Answer getFirstAnswer(Q1Object input, TestCase test)
@@ -128,12 +128,12 @@ namespace C_Sharp_Skeleton_2019.Tests
                 }
             }
 
-            if (travisUUID.Length > 0)
+            /*if (travisUUID.Length > 0)
             {
                 Console.WriteLine("Submitting Q2");
                 string ans = JsonConvert.SerializeObject(answers);
                 await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/2", new StringContent(ans, Encoding.UTF8, "application/json"));
-            }
+            }*/
         }
 
         Answer getSecondAnswer(Q2Object input, TestCase test)
@@ -198,12 +198,12 @@ namespace C_Sharp_Skeleton_2019.Tests
                 }
             }
 
-            if (travisUUID.Length > 0)
+            /*if (travisUUID.Length > 0)
             {
                 Console.WriteLine("Submitting Q3");
                 string ans = JsonConvert.SerializeObject(answers);
                 await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/3", new StringContent(ans, Encoding.UTF8, "application/json"));
-            }
+            }*/
         }
 
         Answer getThirdAnswer(Q3Object input, TestCase test)
@@ -268,12 +268,12 @@ namespace C_Sharp_Skeleton_2019.Tests
                 }
             }
 
-            if (travisUUID.Length > 0)
+            /*if (travisUUID.Length > 0)
             {
                 Console.WriteLine("Submitting Q4");
                 string ans = JsonConvert.SerializeObject(answers);
                 await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/4", new StringContent(ans, Encoding.UTF8, "application/json"));
-            }
+            }*/
         }
 
         Answer getFourthAnswer(Q4Object input, TestCase test)
@@ -339,12 +339,12 @@ namespace C_Sharp_Skeleton_2019.Tests
             }
 
 
-            if (travisUUID.Length > 0)
+            /*if (travisUUID.Length > 0)
             {
                 Console.WriteLine("Submitting Q5");
                 string ans = JsonConvert.SerializeObject(answers);
                 await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/5", new StringContent(ans, Encoding.UTF8, "application/json"));
-            }
+            }*/
         }
 
         Answer getFifthAnswer(int[] input, TestCase test)
@@ -409,12 +409,12 @@ namespace C_Sharp_Skeleton_2019.Tests
                 }
             }
 
-            if (travisUUID.Length > 0)
+            /*if (travisUUID.Length > 0)
             {
                 Console.WriteLine("Submitting Q6");
                 string ans = JsonConvert.SerializeObject(answers);
                 await client.PostAsync(baseUrl + "answer/contestant/" + travisUUID + "/6", new StringContent(ans, Encoding.UTF8, "application/json"));
-            }
+            }*/
         }
 
         Answer getSixthAnswer(string[] input, TestCase test)
